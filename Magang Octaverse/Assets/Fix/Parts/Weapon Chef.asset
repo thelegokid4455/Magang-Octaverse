@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
-  m_Name: Weapon Farmer
+  m_Name: Weapon Chef
   m_EditorClassIdentifier: 
   partId: 0
-  partName: Farmers Sickle
-  partImage: {fileID: 21300000, guid: c373e55394264784ca00698f2aa07ee5, type: 3}
+  partName: Chef Paddle
+  partImage: {fileID: 21300000, guid: 446ef34c281ae464997f2d612c90eeb3, type: 3}
   partDescription: 
   partType: 2
-  partElement: 3
-  partHealthAdd: 25
-  partSpeedAdd: 1
-  partLuckAdd: 1
-  partCard: {fileID: 11400000, guid: e8573f056ea9fa645a2d13f48c3e4a83, type: 2}
+  partElement: 1
+  partHealthAdd: 0
+  partSpeedAdd: 4
+  partLuckAdd: 0
+  partCard: {fileID: 11400000, guid: 22af119a197a08b489b4c0d89e586cee, type: 2}

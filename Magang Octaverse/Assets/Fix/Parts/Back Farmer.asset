@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
-  m_Name: Top Chef
+  m_Name: Back Farmer
   m_EditorClassIdentifier: 
   partId: 0
-  partName: Chef Hat
-  partImage: {fileID: 21300000, guid: cf9d99bac646ed04c833e5795bb0ba3b, type: 3}
+  partName: Farmers Gathering Bag
+  partImage: {fileID: 21300000, guid: 0d6719803db1e134da872be8f4a3e634, type: 3}
   partDescription: 
-  partType: 3
-  partElement: 1
-  partHealthAdd: 25
-  partSpeedAdd: 1
-  partLuckAdd: 1
-  partCard: {fileID: 11400000, guid: e8573f056ea9fa645a2d13f48c3e4a83, type: 2}
+  partType: 4
+  partElement: 3
+  partHealthAdd: 18
+  partSpeedAdd: 2
+  partLuckAdd: 0
+  partCard: {fileID: 11400000, guid: f60000b20b85f4d43a7315ef223aae10, type: 2}

@@ -7578,10 +7578,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 6666759800274823335, guid: e12b0c960580e894f973f514a6c3dbad, type: 3}
-      propertyPath: thisCharacter
-      value: 
-      objectReference: {fileID: 11400000, guid: f7c3e88dfdb132e4bac128b622130207, type: 2}
     - target: {fileID: 6666759800524431107, guid: e12b0c960580e894f973f514a6c3dbad, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
