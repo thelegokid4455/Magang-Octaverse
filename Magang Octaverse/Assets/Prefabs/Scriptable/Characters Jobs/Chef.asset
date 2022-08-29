@@ -18,3 +18,8 @@ MonoBehaviour:
   characterSpeed: 5
   characterCards:
   - {fileID: 11400000, guid: e8573f056ea9fa645a2d13f48c3e4a83, type: 2}
+  characterBody: {fileID: 11400000, guid: 1582b51846566104e9a4a50d7cc1962c, type: 2}
+  characterFace: {fileID: 11400000, guid: dd9b5129bea24c64892a79524ef98b12, type: 2}
+  characterWeapon: {fileID: 11400000, guid: f6784d1ece05eb047a9b17289c682316, type: 2}
+  characterTop: {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
+  characterBack: {fileID: 11400000, guid: b4c2716f8ed357f4bb169da729401dc6, type: 2}

@@ -21,3 +21,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ef6425360214f843b561087351d1125, type: 2}
   - {fileID: 11400000, guid: 8a1712930d6ebf44bbf9affff6f0510e, type: 2}
   - {fileID: 11400000, guid: 143d626a173535a438ad9b72ca5a1970, type: 2}
+  characterBody: {fileID: 11400000, guid: 10fbda41712fb2142a178bc036f5fde4, type: 2}
+  characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
+  characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
+  characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
+  characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}

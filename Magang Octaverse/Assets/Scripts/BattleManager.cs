@@ -351,12 +351,12 @@ public class BattleManager : MonoBehaviour
 
     void SpawnNewCard(GameplayCharacter character,  Transform cardPos)
     {
-        var index = UnityEngine.Random.Range(0, character.thisCharacter.characterCards.Count);
+        var index = UnityEngine.Random.Range(0, character.availableCards.Count);
 
         var newCard = Instantiate(GameManager.instance.battleCard, Vector3.zero, Quaternion.identity);
-        newCard.SendMessage("SetCard", character.thisCharacter.characterCards[index], SendMessageOptions.DontRequireReceiver);
+        newCard.SendMessage("SetCard", character.availableCards[index], SendMessageOptions.DontRequireReceiver);
 
-        if (character.thisCharacter.characterCards[index].isEnemy)
+        if (character.availableCards[index].isEnemy)
         {
             // enemyPositions[currentEnemies.IndexOf(character)].selectedCardPos;
 
@@ -683,9 +683,9 @@ public class BattleManager : MonoBehaviour
     {
         foreach(GameplayCharacter enemy in currentEnemies)
         {
-            var index = UnityEngine.Random.Range(0, enemy.thisCharacter.characterCards.Count);
+            var index = UnityEngine.Random.Range(0, enemy.availableCards.Count);
 
-            if (enemyCurMana >= enemy.thisCharacter.characterCards[index].cardMana)
+            if (enemyCurMana >= enemy.availableCards[index].cardMana)
             {
                 SpawnNewCard(enemy, enemyPositions[currentEnemies.IndexOf(enemy)].selectedCardPos);
                 

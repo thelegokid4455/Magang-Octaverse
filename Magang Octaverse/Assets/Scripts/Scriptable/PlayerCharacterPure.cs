@@ -11,5 +11,14 @@ public class PlayerCharacterPure : ScriptableObject
 
     public int characterSpeed;
 
-    public List<Card> characterCards = new List<Card>();
+    public bool isEnemy;
+
+    public List<Card> enemyCards = new List<Card>();
+
+    //parts
+    public BodyPart characterBody;
+    public BodyPart characterFace;
+    public BodyPart characterWeapon;
+    public BodyPart characterTop;
+    public BodyPart characterBack;
 }

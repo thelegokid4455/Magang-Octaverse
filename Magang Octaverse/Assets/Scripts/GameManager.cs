@@ -65,3 +65,12 @@ public enum Elements
     Light,
     Dark
 }
+
+public enum BodyParts
+{
+    Body,
+    Face,
+    Weapon,
+    Top,
+    Back
+}
