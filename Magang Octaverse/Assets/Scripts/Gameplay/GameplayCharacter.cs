@@ -66,21 +66,30 @@ public class GameplayCharacter : MonoBehaviour
         {
             //characterSprite.sprite = thisCharacter.characterSprite;
 
+            //set image
             spriteBody.sprite = thisCharacter.characterBody.partImage;
             spriteFace.sprite = thisCharacter.characterFace.partImage;
             spriteWeapon.sprite = thisCharacter.characterWeapon.partImage;
             spriteTop.sprite = thisCharacter.characterTop.partImage;
             spriteBack.sprite = thisCharacter.characterBack.partImage;
 
-            characterSpeed = thisCharacter.characterSpeed;
+            //characterSpeed = thisCharacter.characterSpeed;
 
-            //seat values
-            maxHealth += thisCharacter.characterBody.partHealthAdd 
-                + thisCharacter.characterFace.partHealthAdd 
-                + thisCharacter.characterWeapon.partHealthAdd 
-                + thisCharacter.characterTop.partHealthAdd 
+            //set speed
+            characterSpeed += thisCharacter.characterBody.partSpeedAdd
+                + thisCharacter.characterFace.partSpeedAdd
+                + thisCharacter.characterWeapon.partSpeedAdd
+                + thisCharacter.characterTop.partSpeedAdd
+                + thisCharacter.characterBack.partSpeedAdd;
+
+            //set health
+            maxHealth += thisCharacter.characterBody.partHealthAdd
+                + thisCharacter.characterFace.partHealthAdd
+                + thisCharacter.characterWeapon.partHealthAdd
+                + thisCharacter.characterTop.partHealthAdd
                 + thisCharacter.characterBack.partHealthAdd;
 
+            //set cards
             if (thisCharacter.isEnemy)
             {
                 foreach(Card card in thisCharacter.enemyCards)
@@ -91,7 +100,7 @@ public class GameplayCharacter : MonoBehaviour
             }
             else
             {
-                availableCards.Add(thisCharacter.characterBody.partCard);
+                //availableCards.Add(thisCharacter.characterBody.partCard);
                 availableCards.Add(thisCharacter.characterFace.partCard);
                 availableCards.Add(thisCharacter.characterWeapon.partCard);
                 availableCards.Add(thisCharacter.characterTop.partCard);
@@ -101,22 +110,29 @@ public class GameplayCharacter : MonoBehaviour
         }
         else
         {
+            //set image
             spriteBody.sprite = characterBody.partImage;
             spriteFace.sprite = characterFace.partImage;
             spriteWeapon.sprite = characterWeapon.partImage;
             spriteTop.sprite = characterTop.partImage;
             spriteBack.sprite = characterBack.partImage;
 
-            characterSpeed = 3;
+            //set speed
+            characterSpeed += characterBody.partSpeedAdd
+                + characterFace.partSpeedAdd
+                + characterWeapon.partSpeedAdd
+                + characterTop.partSpeedAdd
+                + characterBack.partSpeedAdd;
 
-            //seat values
+            //set health
             maxHealth += characterBody.partHealthAdd
                 + characterFace.partHealthAdd
                 + characterWeapon.partHealthAdd
                 + characterTop.partHealthAdd
                 + characterBack.partHealthAdd;
 
-            availableCards.Add(characterBody.partCard);
+            //set cards
+            //availableCards.Add(characterBody.partCard);
             availableCards.Add(characterFace.partCard);
             availableCards.Add(characterWeapon.partCard);
             availableCards.Add(characterTop.partCard);
