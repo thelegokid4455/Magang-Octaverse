@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
-  m_Name: Face Chef
+  m_Name: Top Farmer
   m_EditorClassIdentifier: 
   partId: 0
-  partName: Chef Face
-  partImage: {fileID: 21300000, guid: 4d5c7ffc98ccdf840ab03fc2a454dce2, type: 3}
+  partName: Farmers Hat
+  partImage: {fileID: 21300000, guid: dabee0409db86da40ba86825cdc18c2d, type: 3}
   partDescription: 
-  partType: 1
-  partElement: 1
-  partHealthAdd: 25
-  partSpeedAdd: 1
-  partLuckAdd: 1
-  partCard: {fileID: 11400000, guid: e8573f056ea9fa645a2d13f48c3e4a83, type: 2}
+  partType: 3
+  partElement: 3
+  partHealthAdd: 9
+  partSpeedAdd: 0
+  partLuckAdd: 0
+  partCard: {fileID: 11400000, guid: aa6748b5047c12949ae76e4d532c9a36, type: 2}
