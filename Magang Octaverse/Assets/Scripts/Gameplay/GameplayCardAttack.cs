@@ -9,6 +9,7 @@ public class GameplayCardAttack : MonoBehaviour
     //stats
     public Card thisCard;
     bool isSelected;
+    public Elements thisElement;
 
     public int cardCharRow;
     public int cardCharSpeed;
@@ -50,7 +51,6 @@ public class GameplayCardAttack : MonoBehaviour
     void SetRow(int row)
     {
         cardCharRow = row;
-        SetImage();
     }
     void SetData()
     {
@@ -62,9 +62,20 @@ public class GameplayCardAttack : MonoBehaviour
             if (BattleManager.instance.currentCharacters.IndexOf(character) == cardCharRow - 1)
             {
                 if (!thisCard.isEnemy)
+                {
                     BattleManager.instance.currentCharacters[BattleManager.instance.currentCharacters.IndexOf(character)].myCards.Add(this);
+                    thisElement = BattleManager.instance.currentCharacters[cardCharRow - 1].thisElement;
+                }
+                else
+                {
+                    thisElement = BattleManager.instance.currentEnemies[cardCharRow - 1].thisElement;
+                }
+
             }
         }
+        
+        SetImage();
+
     }
 
 
@@ -80,7 +91,7 @@ public class GameplayCardAttack : MonoBehaviour
             shieldText.text = thisCard.cardShieldAdd.ToString();
             descText.text = thisCard.cardDesc;
 
-            switch (thisCard.cardElement)
+            switch (thisElement)
             {
                 case Elements.Neutral:
                     cardBaseSprite.sprite = GameManager.instance.neutralCardBase;
@@ -101,6 +112,7 @@ public class GameplayCardAttack : MonoBehaviour
                     cardBaseSprite.sprite = GameManager.instance.darkCardBase;
                     break;
             }
+            //print("Set card " + thisElement);
         }
     }
 
