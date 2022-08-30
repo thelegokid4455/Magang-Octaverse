@@ -146,9 +146,42 @@ public class BattleManager : MonoBehaviour
         GameManager.instance.EnterBattle();
 
         currentMission = mission;
+
+        SpawnPlayers();
         SpawnEnemies();
 
         SetBattle();
+    }
+
+    void SpawnPlayers()
+    {
+        /*
+        foreach (GameplayCharacter character in currentCharacters.ToList())
+        {
+            if (character.curHealth <= 0)
+            {
+                Destroy(character.gameObject);
+                currentEnemies.Remove(character);
+            }
+        }
+        */
+
+        foreach (Character character in GameManager.instance.selectedCharacters)
+        {
+            var newPlayer = Instantiate(GameManager.instance.battleCharacter, Vector3.zero, Quaternion.identity);
+            //newEnemy.GetComponent<GameplayCharacter>().SetCharacter(character);
+            newPlayer.GetComponent<GameplayCharacter>().SetData(character.characterBody, character.characterFace, character.characterWeapon, character.characterTop, character.characterBack);
+
+            newPlayer.transform.parent = characterPositions[GameManager.instance.selectedCharacters.IndexOf(character)].selectedCharacterPos;
+
+            newPlayer.transform.DOLocalMove(Vector3.zero, 1);
+            newPlayer.transform.localRotation = Quaternion.identity;
+            newPlayer.transform.DOScale(Vector3.one, 1);
+
+            currentCharacters.Add(newPlayer.GetComponent<GameplayCharacter>());
+        }
+
+        //SetCharacterPosition();
     }
 
     void SpawnEnemies()
@@ -170,7 +203,7 @@ public class BattleManager : MonoBehaviour
                 {
                     var newEnemy = Instantiate(GameManager.instance.battleCharacter, Vector3.zero, Quaternion.identity);
                     newEnemy.GetComponent<GameplayCharacter>().SetCharacter(character);
-                    newEnemy.GetComponent<GameplayCharacter>().SetData();
+                    newEnemy.GetComponent<GameplayCharacter>().SetData(character.characterBody, character.characterFace, character.characterWeapon, character.characterTop, character.characterBack);
 
                     newEnemy.transform.parent = enemyPositions[waves.enemyToSpawn.IndexOf(character)].selectedCharacterPos;
 
@@ -206,12 +239,12 @@ public class BattleManager : MonoBehaviour
 
         foreach(GameplayCharacter character in currentCharacters)
         {
-            character.SetData();
+            //character.SetData();
             character.cardHeldThisDeckRotation = 0;
         }
         foreach (GameplayCharacter character in currentEnemies)
         {
-            character.SetData();
+            //character.SetData();
             character.cardHeldThisDeckRotation = 0;
         }
 

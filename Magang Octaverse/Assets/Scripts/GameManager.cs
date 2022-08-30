@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     //temporary characters
-    public PlayerCharacterPure character1;
-    public PlayerCharacterPure character2;
-    public PlayerCharacterPure character3;
-    public PlayerCharacterPure character4;
+    public List<Character> selectedCharacters = new List<Character>();
 
     public GameObject MenuScene;
     public GameObject BattleScene;
@@ -54,6 +52,16 @@ public class GameManager : MonoBehaviour
         inBattle = false;
     }
 
+}
+
+[Serializable]
+public class Character
+{
+    public BodyPart characterBody;
+    public BodyPart characterFace;
+    public BodyPart characterWeapon;
+    public BodyPart characterTop;
+    public BodyPart characterBack;
 }
 
 public enum Elements

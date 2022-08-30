@@ -7,6 +7,7 @@ using DG.Tweening;
 public class GameplayCharacter : MonoBehaviour
 {
     public PlayerCharacterPure thisCharacter;
+    public Elements thisElement;
 
     //stat
     public int characterRow;
@@ -46,12 +47,12 @@ public class GameplayCharacter : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //SetData();
+
     }
 
     private void Start()
     {
-        //SetData();
+
     }
 
     public void SetCharacter(PlayerCharacterPure character)
@@ -59,12 +60,16 @@ public class GameplayCharacter : MonoBehaviour
         thisCharacter = character;
     }
 
-    public void SetData()
+    public void SetData(BodyPart newBody, BodyPart newFace, BodyPart newWeapon, BodyPart newTop, BodyPart newBack)
     {
 
         if (thisCharacter)
         {
-            //characterSprite.sprite = thisCharacter.characterSprite;
+            characterBody = thisCharacter.characterBody;
+            characterFace = thisCharacter.characterFace;
+            characterWeapon = thisCharacter.characterWeapon;
+            characterTop = thisCharacter.characterTop;
+            characterBack = thisCharacter.characterBack;
 
             //set image
             spriteBody.sprite = thisCharacter.characterBody.partImage;
@@ -72,6 +77,9 @@ public class GameplayCharacter : MonoBehaviour
             spriteWeapon.sprite = thisCharacter.characterWeapon.partImage;
             spriteTop.sprite = thisCharacter.characterTop.partImage;
             spriteBack.sprite = thisCharacter.characterBack.partImage;
+
+            //set element
+            thisElement = thisCharacter.characterBody.partElement;
 
             //characterSpeed = thisCharacter.characterSpeed;
 
@@ -110,12 +118,21 @@ public class GameplayCharacter : MonoBehaviour
         }
         else
         {
+            characterBody = newBody;
+            characterFace = newFace;
+            characterWeapon = newWeapon;
+            characterTop = newTop;
+            characterBack = newBack;
+
             //set image
             spriteBody.sprite = characterBody.partImage;
             spriteFace.sprite = characterFace.partImage;
             spriteWeapon.sprite = characterWeapon.partImage;
             spriteTop.sprite = characterTop.partImage;
             spriteBack.sprite = characterBack.partImage;
+
+            //set element
+            thisElement = characterBody.partElement;
 
             //set speed
             characterSpeed += characterBody.partSpeedAdd
@@ -137,6 +154,11 @@ public class GameplayCharacter : MonoBehaviour
             availableCards.Add(characterWeapon.partCard);
             availableCards.Add(characterTop.partCard);
             availableCards.Add(characterBack.partCard);
+        }
+
+        foreach(GameplayCardAttack card in myCards)
+        {
+            card.thisElement = thisElement;
         }
 
 
