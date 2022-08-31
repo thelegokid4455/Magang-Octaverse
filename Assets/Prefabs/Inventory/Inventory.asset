@@ -12,15 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7cb00a8ebd27e488bead60fe49ca05, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
-  characterInInventory:
-  - characterBody: {fileID: 0}
-    characterFace: {fileID: 0}
-    characterWeapon: {fileID: 0}
-    characterTop: {fileID: 0}
-    characterBack: {fileID: 0}
+  characterInInventory: []
   startingCharacter:
-    characterBody: {fileID: 0}
-    characterFace: {fileID: 0}
-    characterWeapon: {fileID: 0}
-    characterTop: {fileID: 0}
-    characterBack: {fileID: 0}
+  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
+    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
+    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
+    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
+    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
+  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
+    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
+    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
+    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
+    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
+  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
+    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
+    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
+    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
+    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
+  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
+    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
+    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
+    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
+    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
