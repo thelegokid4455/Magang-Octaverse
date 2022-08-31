@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
-  m_Name: Face Chef
+  m_Name: Face Magician
   m_EditorClassIdentifier: 
   partId: 0
-  partName: Chef Face
-  partImage: {fileID: 21300000, guid: 4fd1abbbb2734dd4dbb6139c234cafdb, type: 3}
+  partName: Magician Face
+  partImage: {fileID: 21300000, guid: d8f8ee6f55bbd0d43980edfec9effafe, type: 3}
   partDescription: 
   partType: 1
-  partElement: 1
+  partElement: 5
   partHealthAdd: 0
   partSpeedAdd: 0
-  partLuckAdd: 2
-  partCard: {fileID: 11400000, guid: e89847ec4b14deb43b75be2f06705128, type: 2}
+  partLuckAdd: 9
+  partCard: {fileID: 11400000, guid: e276688b0bec00f49ad763eba0afbc40, type: 2}

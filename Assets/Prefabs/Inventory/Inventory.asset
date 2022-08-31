@@ -12,25 +12,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7cb00a8ebd27e488bead60fe49ca05, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
-  characterInInventory: []
+  characterInInventory:
+  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
+    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
+    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
+    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
+    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
+  - characterBody: {fileID: 11400000, guid: 10fbda41712fb2142a178bc036f5fde4, type: 2}
+    characterFace: {fileID: 11400000, guid: 022f2dfe72a0bca4e8d232f767f9bfa4, type: 2}
+    characterWeapon: {fileID: 11400000, guid: beceeec3345eeb94ebe9743d5ea5db0e, type: 2}
+    characterTop: {fileID: 11400000, guid: 2a9b9b2a0012d2b47be7e4f6e5c91ea5, type: 2}
+    characterBack: {fileID: 11400000, guid: fb18058e771dd034ba06f38865f2156f, type: 2}
+  - characterBody: {fileID: 11400000, guid: 1582b51846566104e9a4a50d7cc1962c, type: 2}
+    characterFace: {fileID: 11400000, guid: dd9b5129bea24c64892a79524ef98b12, type: 2}
+    characterWeapon: {fileID: 11400000, guid: f6784d1ece05eb047a9b17289c682316, type: 2}
+    characterTop: {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
+    characterBack: {fileID: 11400000, guid: b4c2716f8ed357f4bb169da729401dc6, type: 2}
+  - characterBody: {fileID: 11400000, guid: 30ff92db1ae3594448f1fd3bd1b5d3bb, type: 2}
+    characterFace: {fileID: 11400000, guid: 005c12f02f7fcd846a4fedf0a91ca751, type: 2}
+    characterWeapon: {fileID: 11400000, guid: 1a9755bf684d70e43b53de043978e444, type: 2}
+    characterTop: {fileID: 11400000, guid: 87df944a15f578c489d3b5ef7de81e09, type: 2}
+    characterBack: {fileID: 11400000, guid: 9e88f5beddfdb804b998b626195632b4, type: 2}
+  - characterBody: {fileID: 11400000, guid: b44422a00b796eb4084bf6bfddca8155, type: 2}
+    characterFace: {fileID: 11400000, guid: 2ae7f77535d5a884b97a7c87a5d0de5e, type: 2}
+    characterWeapon: {fileID: 11400000, guid: d9cd4fe757cc90a489508532238eb9c5, type: 2}
+    characterTop: {fileID: 11400000, guid: b8f9861d48f45094b8b4cba79cd73fa4, type: 2}
+    characterBack: {fileID: 11400000, guid: 752212357ebb59f4d80a5c59b40c70fe, type: 2}
   startingCharacter:
   - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
     characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
     characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
     characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
     characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
-  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
-    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
-    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
-    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
-    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
-  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
-    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
-    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
-    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
-    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
-  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
-    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
-    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
-    characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
-    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
+  - characterBody: {fileID: 11400000, guid: 10fbda41712fb2142a178bc036f5fde4, type: 2}
+    characterFace: {fileID: 11400000, guid: 022f2dfe72a0bca4e8d232f767f9bfa4, type: 2}
+    characterWeapon: {fileID: 11400000, guid: beceeec3345eeb94ebe9743d5ea5db0e, type: 2}
+    characterTop: {fileID: 11400000, guid: 2a9b9b2a0012d2b47be7e4f6e5c91ea5, type: 2}
+    characterBack: {fileID: 11400000, guid: fb18058e771dd034ba06f38865f2156f, type: 2}
+  - characterBody: {fileID: 11400000, guid: 1582b51846566104e9a4a50d7cc1962c, type: 2}
+    characterFace: {fileID: 11400000, guid: dd9b5129bea24c64892a79524ef98b12, type: 2}
+    characterWeapon: {fileID: 11400000, guid: f6784d1ece05eb047a9b17289c682316, type: 2}
+    characterTop: {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
+    characterBack: {fileID: 11400000, guid: b4c2716f8ed357f4bb169da729401dc6, type: 2}
+  - characterBody: {fileID: 11400000, guid: 30ff92db1ae3594448f1fd3bd1b5d3bb, type: 2}
+    characterFace: {fileID: 11400000, guid: 005c12f02f7fcd846a4fedf0a91ca751, type: 2}
+    characterWeapon: {fileID: 11400000, guid: 1a9755bf684d70e43b53de043978e444, type: 2}
+    characterTop: {fileID: 11400000, guid: 87df944a15f578c489d3b5ef7de81e09, type: 2}
+    characterBack: {fileID: 11400000, guid: 9e88f5beddfdb804b998b626195632b4, type: 2}
+  - characterBody: {fileID: 11400000, guid: b44422a00b796eb4084bf6bfddca8155, type: 2}
+    characterFace: {fileID: 11400000, guid: 2ae7f77535d5a884b97a7c87a5d0de5e, type: 2}
+    characterWeapon: {fileID: 11400000, guid: d9cd4fe757cc90a489508532238eb9c5, type: 2}
+    characterTop: {fileID: 11400000, guid: b8f9861d48f45094b8b4cba79cd73fa4, type: 2}
+    characterBack: {fileID: 11400000, guid: 752212357ebb59f4d80a5c59b40c70fe, type: 2}

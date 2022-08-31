@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
-  m_Name: Face Chef
+  m_Name: Back Fish
   m_EditorClassIdentifier: 
   partId: 0
-  partName: Chef Face
-  partImage: {fileID: 21300000, guid: 4fd1abbbb2734dd4dbb6139c234cafdb, type: 3}
+  partName: Giant Fish Back
+  partImage: {fileID: 21300000, guid: 4cd6873995c5c834ea4dd142873868d7, type: 3}
   partDescription: 
-  partType: 1
-  partElement: 1
-  partHealthAdd: 0
-  partSpeedAdd: 0
-  partLuckAdd: 2
-  partCard: {fileID: 11400000, guid: e89847ec4b14deb43b75be2f06705128, type: 2}
+  partType: 4
+  partElement: 2
+  partHealthAdd: 21
+  partSpeedAdd: 5
+  partLuckAdd: 0
+  partCard: {fileID: 11400000, guid: ac0569fa0a9a84748b8ca8f157119e63, type: 2}

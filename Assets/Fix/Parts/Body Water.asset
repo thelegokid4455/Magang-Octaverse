@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partId: 0
   partName: Body
-  partImage: {fileID: 21300000, guid: d922745b31b8ebb44a333a0fd794b22f, type: 3}
+  partImage: {fileID: 21300000, guid: 9ba5e1f7801e99740976dc1b5099dfe7, type: 3}
   partDescription: 
   partType: 0
   partElement: 2

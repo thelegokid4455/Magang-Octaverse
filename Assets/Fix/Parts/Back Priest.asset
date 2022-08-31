@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
-  m_Name: Face Chef
+  m_Name: Back Priest
   m_EditorClassIdentifier: 
   partId: 0
-  partName: Chef Face
-  partImage: {fileID: 21300000, guid: 4fd1abbbb2734dd4dbb6139c234cafdb, type: 3}
+  partName: Priest Cloak
+  partImage: {fileID: 21300000, guid: cd1c8cf62fead2b4dbcb6f64b080e292, type: 3}
   partDescription: 
-  partType: 1
-  partElement: 1
-  partHealthAdd: 0
-  partSpeedAdd: 0
-  partLuckAdd: 2
-  partCard: {fileID: 11400000, guid: e89847ec4b14deb43b75be2f06705128, type: 2}
+  partType: 4
+  partElement: 4
+  partHealthAdd: 32
+  partSpeedAdd: 2
+  partLuckAdd: 0
+  partCard: {fileID: 11400000, guid: ab57354a1f260824eb93fc15aae238bf, type: 2}
