@@ -128,7 +128,7 @@ public class BattleManager : MonoBehaviour
         if (enemyCurMana > enemyMaxMana) enemyCurMana = enemyMaxMana;
 
         //UI
-        gameRoundText.text = "Round " + currentRound;
+        gameRoundText.text = "ROUND \n" + currentRound;
         gameReadyButton.SetActive(currentPhase == 1);
 
         playerManaText.text = playerCurMana + " / " + playerMaxMana;
@@ -359,6 +359,8 @@ public class BattleManager : MonoBehaviour
                         {
                             SpawnNewCard(character, CheckEmptySlotReturn(character.characterRow - 1));
                             character.cardHeldThisDeckRotation++;
+
+                            curPlayerCard --;
                         }
                         else
                         {
@@ -509,8 +511,8 @@ public class BattleManager : MonoBehaviour
     {
         if(curBattleTurnCard >= selectedCards.Count)
         {
-            curPlayerCard -= playerCardUsed;
-            curEnemyCard -= enemyCardUsed;
+            //curPlayerCard -= playerCardUsed;
+            //curEnemyCard -= enemyCardUsed;
 
             curPlayerDiscard += playerCardUsed;
             curEnemyDiscard += enemyCardUsed;
@@ -768,7 +770,10 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
-        
+        if(currentCharacters.Count <= 0)
+        {
+            FinishedBattle();
+        }
 
         playerCurMana += manaAddPerRound;
         if (playerCurMana > playerMaxMana) playerCurMana = playerMaxMana;
