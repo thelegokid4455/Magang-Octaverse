@@ -32,7 +32,25 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(selectedCharacters.Count <= 0)
+        {
+            if(InventoryManager.instance.playerInventory.characterInInventory.Count >= 4)
+            {
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[0]);
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[1]);
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[2]);
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[3]);
+            }
+            else
+            {
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[0]);
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[1]);
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[2]);
+                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[3]);
+            }
+
+            MenuSceneManager.instance.SetIdleCharData();
+        }
     }
 
     // Update is called once per frame
@@ -50,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void ExitBattle()
     {
         inBattle = false;
+        MenuSceneManager.instance.SetIdleCharData();
     }
 
 }

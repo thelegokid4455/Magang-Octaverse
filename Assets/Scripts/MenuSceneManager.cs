@@ -14,10 +14,17 @@ public class MenuSceneManager : MonoBehaviour
     [SerializeField] GameObject HomeMenu;
     [SerializeField] GameObject BattleMenu;
 
+    public static MenuSceneManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        SetIdleCharData();
+        //SetIdleCharData();
     }
 
     // Update is called once per frame
@@ -27,7 +34,7 @@ public class MenuSceneManager : MonoBehaviour
         BattleMenu.SetActive(GameManager.instance.inBattle);
     }
 
-    void SetIdleCharData()
+    public void SetIdleCharData()
     {
         foreach(GameplayCharacterIdle character in characters)
         {

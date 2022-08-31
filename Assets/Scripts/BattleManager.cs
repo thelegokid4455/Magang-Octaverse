@@ -723,6 +723,7 @@ public class BattleManager : MonoBehaviour
             if (enemyCurMana >= enemy.availableCards[index].cardMana)
             {
                 SpawnNewCard(enemy, enemyPositions[currentEnemies.IndexOf(enemy)].selectedCardPos);
+                curEnemyCard--;
                 
             }
             else

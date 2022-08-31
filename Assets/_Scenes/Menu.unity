@@ -6639,27 +6639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed32cd7c8233a740a5e9120748ced7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedCharacters:
-  - characterBody: {fileID: 11400000, guid: 10fbda41712fb2142a178bc036f5fde4, type: 2}
-    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
-    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
-    characterTop: {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
-    characterBack: {fileID: 11400000, guid: b4c2716f8ed357f4bb169da729401dc6, type: 2}
-  - characterBody: {fileID: 11400000, guid: 1582b51846566104e9a4a50d7cc1962c, type: 2}
-    characterFace: {fileID: 11400000, guid: dd9b5129bea24c64892a79524ef98b12, type: 2}
-    characterWeapon: {fileID: 11400000, guid: f6784d1ece05eb047a9b17289c682316, type: 2}
-    characterTop: {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
-    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
-  - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
-    characterFace: {fileID: 11400000, guid: dd9b5129bea24c64892a79524ef98b12, type: 2}
-    characterWeapon: {fileID: 11400000, guid: f6784d1ece05eb047a9b17289c682316, type: 2}
-    characterTop: {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
-    characterBack: {fileID: 11400000, guid: b4c2716f8ed357f4bb169da729401dc6, type: 2}
-  - characterBody: {fileID: 11400000, guid: 10fbda41712fb2142a178bc036f5fde4, type: 2}
-    characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
-    characterWeapon: {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
-    characterTop: {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
-    characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
+  selectedCharacters: []
   MenuScene: {fileID: 874399271}
   BattleScene: {fileID: 1722732161}
   inBattle: 0
