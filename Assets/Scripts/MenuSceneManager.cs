@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class MenuSceneManager : MonoBehaviour
 {
-    [SerializeField] Transform[] idlePosition;
     //[SerializeField] List<GameObject> selectedChars = new List<GameObject>();
 
     //Character
-    [SerializeField] List<GameplayCharacterIdle> characters = new List<GameplayCharacterIdle>();
-    [SerializeField] GameObject characterObjects;
+    public List<GameplayCharacterIdle> charactersHome = new List<GameplayCharacterIdle>();
+
+    public List<GameplayCharacterIdle> charactersTeam = new List<GameplayCharacterIdle>();
 
     //UI
 
@@ -83,8 +83,6 @@ public class MenuSceneManager : MonoBehaviour
             RecruitMenu.SetActive(false);
             StoreMenu.SetActive(false);
 
-            characterObjects.SetActive(false);
-
         }
         else
         {
@@ -102,25 +100,55 @@ public class MenuSceneManager : MonoBehaviour
             BattleScene.SetActive(false);
 
             MainMenu.SetActive(true);
-
-            characterObjects.SetActive(true);
         }
 
-        currentCoinText.text = GameManager.instance.currentCoin.ToString();
+        currentCoinText.text = GameManager.instance.currentMoney.ToString();
     }
 
-    public void SetIdleCharData()
+    public void SetCharData()
     {
-        foreach(GameplayCharacterIdle character in characters)
+
+        //team
+        foreach (GameplayCharacterIdle character in charactersTeam)
         {
-            character.characterBody = GameManager.instance.selectedCharacters[characters.IndexOf(character)].characterBody;
-            character.characterFace = GameManager.instance.selectedCharacters[characters.IndexOf(character)].characterFace;
-            character.characterWeapon = GameManager.instance.selectedCharacters[characters.IndexOf(character)].characterWeapon;
-            character.characterTop = GameManager.instance.selectedCharacters[characters.IndexOf(character)].characterTop;
-            character.characterBack = GameManager.instance.selectedCharacters[characters.IndexOf(character)].characterBack;
+            character.characterBody = GameManager.instance.selectedCharacters[charactersTeam.IndexOf(character)].characterBody;
+            character.characterFace = GameManager.instance.selectedCharacters[charactersTeam.IndexOf(character)].characterFace;
+            character.characterWeapon = GameManager.instance.selectedCharacters[charactersTeam.IndexOf(character)].characterWeapon;
+            character.characterTop = GameManager.instance.selectedCharacters[charactersTeam.IndexOf(character)].characterTop;
+            character.characterBack = GameManager.instance.selectedCharacters[charactersTeam.IndexOf(character)].characterBack;
 
             character.SetIdleImage();
         }
+
+        //home
+        foreach (GameplayCharacterIdle character in charactersHome)
+        {
+            character.characterBody = charactersTeam[charactersHome.IndexOf(character)].characterBody;
+            character.characterFace = charactersTeam[charactersHome.IndexOf(character)].characterFace;
+            character.characterWeapon = charactersTeam[charactersHome.IndexOf(character)].characterWeapon;
+            character.characterTop = charactersTeam[charactersHome.IndexOf(character)].characterTop;
+            character.characterBack = charactersTeam[charactersHome.IndexOf(character)].characterBack;
+
+            character.SetIdleImage();
+        }
+    }
+
+    public void SetNewCharacter()
+    {
+
+        //selected
+        foreach (Character character in GameManager.instance.selectedCharacters)
+        {
+            character.characterBody = charactersTeam[GameManager.instance.selectedCharacters.IndexOf(character)].characterBody;
+            character.characterFace = charactersTeam[GameManager.instance.selectedCharacters.IndexOf(character)].characterFace;
+            character.characterWeapon = charactersTeam[GameManager.instance.selectedCharacters.IndexOf(character)].characterWeapon;
+            character.characterTop = charactersTeam[GameManager.instance.selectedCharacters.IndexOf(character)].characterTop;
+            character.characterBack = charactersTeam[GameManager.instance.selectedCharacters.IndexOf(character)].characterBack;
+
+            //character.SetIdleImage();
+        }
+
+        SetCharData();
     }
 
     //buttons
