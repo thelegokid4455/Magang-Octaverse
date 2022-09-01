@@ -27,6 +27,9 @@ public class GameplayCharacter : MonoBehaviour
     public List<GameplayCardAttack> myCards = new List<GameplayCardAttack>();
     public List<Card> availableCards = new List<Card>();
 
+    //sprites
+    [SerializeField] GameObject animObject;
+
     //[SerializeField] SpriteRenderer characterSprite;
     [SerializeField] SpriteRenderer spriteBody;
     [SerializeField] SpriteRenderer spriteFace;
@@ -179,6 +182,38 @@ public class GameplayCharacter : MonoBehaviour
         shieldBar.gameObject.SetActive(curShield > 0);
 
         if (curHealth > maxHealth) curHealth = maxHealth;
+    }
+
+    //animation
+    public void Attack(Card attackCard)
+    {
+        animObject.GetComponent<Animation>().Stop();
+        if(attackCard.cardAttackType == "Use")
+        {
+            StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Attack Use")));
+
+        }
+        else if (attackCard.cardAttackType == "Attack")
+        {
+            StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Attack Melee")));
+        }
+
+        GetComponent<AudioSource>().PlayOneShot(attackCard.cardAttackSound);
+        var effect = Instantiate(attackCard.cardAttackEffect, transform.position, transform.rotation);
+        effect.transform.localScale = new Vector3(transform.lossyScale.x, 1, 1);
+
+    }
+
+    IEnumerator AttackAnim(AnimationClip animName)
+    {
+
+        animObject.GetComponent<Animation>().clip = animName;
+        animObject.GetComponent<Animation>().Play();
+
+        yield return new WaitForSeconds(animName.length);
+
+        animObject.GetComponent<Animation>().Stop();
+        animObject.GetComponent<Animation>().Play("Idle");
     }
 
     public void ApplyTrueDamage(int dmg)

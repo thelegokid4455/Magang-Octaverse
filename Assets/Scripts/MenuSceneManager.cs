@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuSceneManager : MonoBehaviour
 {
@@ -11,8 +12,19 @@ public class MenuSceneManager : MonoBehaviour
     [SerializeField] List<GameplayCharacterIdle> characters = new List<GameplayCharacterIdle>();
 
     //UI
+
+    [SerializeField] Text currentCoinText;
+
     [SerializeField] GameObject HomeMenu;
     [SerializeField] GameObject BattleMenu;
+    [SerializeField] GameObject FinishMenu;
+
+    [SerializeField] GameObject WinSign;
+    [SerializeField] GameObject LoseSign;
+
+    [SerializeField] Text coinEarnText;
+
+    public GameObject transitionObject;
 
     public static MenuSceneManager instance;
 
@@ -32,6 +44,8 @@ public class MenuSceneManager : MonoBehaviour
     {
         HomeMenu.SetActive(!GameManager.instance.inBattle);
         BattleMenu.SetActive(GameManager.instance.inBattle);
+
+        currentCoinText.text = GameManager.instance.currentCoin.ToString();
     }
 
     public void SetIdleCharData()
@@ -54,7 +68,49 @@ public class MenuSceneManager : MonoBehaviour
     {
         print("Selected mission " + mission.missionName);
 
-        BattleManager.instance.SelectedMission(mission);
+        StartCoroutine(TransitionAnimationStartMission(mission));
+
     }
 
+
+
+    public IEnumerator TransitionAnimationStartMission(Mission mission)
+    {
+        transitionObject.SetActive(true);
+        transitionObject.GetComponent<Animation>().Stop();
+        transitionObject.GetComponent<Animation>().Play();
+        yield return new WaitForSeconds(transitionObject.GetComponent<Animation>().clip.length / 2);
+
+        BattleManager.instance.SelectedMission(mission);
+
+        yield return new WaitForSeconds(transitionObject.GetComponent<Animation>().clip.length / 2);
+
+        transitionObject.SetActive(false);
+        transitionObject.GetComponent<Animation>().Stop();
+    }
+
+    public void FinishBattle(bool isWin)
+    {
+        FinishMenu.SetActive(true);
+
+        coinEarnText.text = "+" + BattleManager.instance.currentMission.missionReward + " Coins";
+
+        WinSign.SetActive(isWin);
+        LoseSign.SetActive(!isWin);
+
+        //
+
+    }
+
+    public void FinishBattleConfirmation()
+    {
+
+        FinishMenu.SetActive(false);
+
+        WinSign.SetActive(false);
+        LoseSign.SetActive(false);
+
+        GameManager.instance.ExitBattle();
+
+    }
 }

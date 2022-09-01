@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     //temporary characters
     public List<Character> selectedCharacters = new List<Character>();
 
+    //gold
+    public int currentCoin;
+
     public GameObject MenuScene;
     public GameObject BattleScene;
     public bool inBattle;
@@ -60,15 +63,29 @@ public class GameManager : MonoBehaviour
         BattleScene.SetActive(inBattle);
     }
 
+    public void AddGold(int amount)
+    {
+        currentCoin += amount;
+    }
+
     public void EnterBattle()
     {
+        //StartCoroutine(TransitionAnimationStart());
         inBattle = true;
+        //StartCoroutine(TransitionAnimationExit());
     }
 
     public void ExitBattle()
     {
+        //StartCoroutine(TransitionAnimationStart());
         inBattle = false;
+        //StartCoroutine(TransitionAnimationExit());
+
         MenuSceneManager.instance.SetIdleCharData();
+
+
+        BattleManager.instance.currentMission = null;
+        BattleManager.instance.hasFinished = false;
     }
 
 }

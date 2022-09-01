@@ -19,6 +19,9 @@ MonoBehaviour:
   cardElement: 1
   cardDesc: Activate Provoke, the enemy that attack will be hit by Burn status
   isEnemy: 0
+  cardAttackType: Attack
+  cardAttackSound: {fileID: 8300000, guid: 87b00718bd0c64b4ca59a38f6339fc81, type: 3}
+  cardAttackEffect: {fileID: 8369644723962029865, guid: 53d377bb47ab25f4c8b69671720a1114, type: 3}
   cardTrueDamage: 0
   cardNormalDamage: 0
   cardHealthAdd: 0

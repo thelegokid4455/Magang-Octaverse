@@ -13,6 +13,12 @@ public class BattleManager : MonoBehaviour
     public int currentPhase; //0 Draw //1 Preparation //2 Battle
     public int currentWave;
 
+    //sounds
+    public AudioClip startBattleSound;
+    public AudioClip newRoundSound;
+    public AudioClip winSound;
+    public AudioClip loseSound;
+
     //stats
     [SerializeField] int playerMaxMana;
     int playerCurMana;
@@ -40,6 +46,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField] int manaAddPerRound;
 
     [SerializeField] int cardsMaxHeldPerCharacterSingleRotation;
+
+    public bool hasStarted;
+    public bool hasFinished;
 
 
     //players
@@ -80,71 +89,81 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentPhase == 0) //draw
+        if(hasStarted)
         {
-
-        }
-        else if (currentPhase == 1) //preparation
-        {
-            
-        }
-        else //battle
-        {
-            curBattleAnimationTurnTime -= Time.deltaTime;
-            if(curBattleAnimationTurnTime <= 0)
+            if (!hasFinished)
             {
-                CardTurnUse();
-            }
-        }
+                if (currentPhase == 0) //draw
+                {
 
-        //pos
-        foreach (GameplayCharacter character in currentCharacters)
-        {
-            if (character != null)
+                }
+                else if (currentPhase == 1) //preparation
+                {
+
+                }
+                else //battle
+                {
+                    curBattleAnimationTurnTime -= Time.deltaTime;
+                    if (curBattleAnimationTurnTime <= 0)
+                    {
+                        CardTurnUse();
+                    }
+                }
+
+                //pos
+                foreach (GameplayCharacter character in currentCharacters)
+                {
+                    if (character != null)
+                    {
+                        //character.transform.DOLocalMove(Vector3.zero, 1);
+                        //character.transform.DOScale(Vector3.one, 1);
+                    }
+                }
+                foreach (GameplayCharacter character in currentEnemies)
+                {
+                    if (character != null)
+                    {
+                        //character.transform.DOLocalMove(Vector3.zero, 1);
+                        //character.transform.DOScale(Vector3.one, 1);
+                    }
+                }
+                foreach (GameplayCardAttack card in selectedCards)
+                {
+                    if (card != null)
+                    {
+                        card.transform.DOLocalMove(Vector3.zero, 1);
+                        card.transform.DOScale(Vector3.one, 1);
+                    }
+                }
+            }
+            else
             {
-                //character.transform.DOLocalMove(Vector3.zero, 1);
-                //character.transform.DOScale(Vector3.one, 1);
+
             }
+
+            //limit
+            if (playerCurMana > playerMaxMana) playerCurMana = playerMaxMana;
+            if (enemyCurMana > enemyMaxMana) enemyCurMana = enemyMaxMana;
+
+            //UI
+            gameRoundText.text = "ROUND \n" + currentRound;
+            gameReadyButton.SetActive(currentPhase == 1);
+
+            playerManaText.text = playerCurMana + " / " + playerMaxMana;
+            playerCardText.text = curPlayerCard.ToString();
+            playerDiscardText.text = curPlayerDiscard.ToString();
+
+            enemyManaText.text = enemyCurMana + " / " + enemyMaxMana;
+            enemyCardText.text = curEnemyCard.ToString();
+            enemyDiscardText.text = curEnemyDiscard.ToString();
         }
-        foreach (GameplayCharacter character in currentEnemies)
-        {
-            if (character != null)
-            {
-                //character.transform.DOLocalMove(Vector3.zero, 1);
-                //character.transform.DOScale(Vector3.one, 1);
-            }
-        }
-        foreach (GameplayCardAttack card in selectedCards)
-        {
-            if (card != null)
-            {
-                card.transform.DOLocalMove(Vector3.zero, 1);
-                card.transform.DOScale(Vector3.one, 1);
-            }
-        }
-
-        //limit
-        if (playerCurMana > playerMaxMana) playerCurMana = playerMaxMana;
-        if (enemyCurMana > enemyMaxMana) enemyCurMana = enemyMaxMana;
-
-        //UI
-        gameRoundText.text = "ROUND \n" + currentRound;
-        gameReadyButton.SetActive(currentPhase == 1);
-
-        playerManaText.text = playerCurMana + " / " + playerMaxMana;
-        playerCardText.text = curPlayerCard.ToString();
-        playerDiscardText.text = curPlayerDiscard.ToString();
-
-        enemyManaText.text = enemyCurMana + " / " + enemyMaxMana;
-        enemyCardText.text = curEnemyCard.ToString();
-        enemyDiscardText.text = curEnemyDiscard.ToString();
+        
     }
 
     //PRE BATTLE
     public void SelectedMission(Mission mission)
     {
         GameManager.instance.EnterBattle();
-
         currentMission = mission;
 
         SpawnPlayers();
@@ -250,6 +269,11 @@ public class BattleManager : MonoBehaviour
 
         print("starting battle, round " + currentRound);
 
+        hasStarted = true;
+
+
+        GetComponent<AudioSource>().PlayOneShot(startBattleSound);
+
         SetCharacterPosition();
 
         DrawCard(10);
@@ -343,6 +367,7 @@ public class BattleManager : MonoBehaviour
     {
         print("starting draw phase, round " + currentRound);
 
+
         var count = 0;
         while(count < cardsToDraw)
         {
@@ -399,11 +424,15 @@ public class BattleManager : MonoBehaviour
             selectedCards.Add(newCard.GetComponent<GameplayCardAttack>());
 
             enemyCurMana -= newCard.GetComponent<GameplayCardAttack>().thisCard.cardMana;
+
+            newCard.GetComponent<GameplayCardAttack>().cardCharacter = currentEnemies[newCard.GetComponent<GameplayCardAttack>().cardCharRow - 1];
         }
         else
         {
 
             newCard.SendMessage("SetRow", (currentCharacters.IndexOf(character) + 1), SendMessageOptions.DontRequireReceiver);
+
+            newCard.GetComponent<GameplayCardAttack>().cardCharacter = currentCharacters[newCard.GetComponent<GameplayCardAttack>().cardCharRow - 1];
         }
 
         newCard.SendMessage("SetData", SendMessageOptions.DontRequireReceiver);
@@ -450,7 +479,7 @@ public class BattleManager : MonoBehaviour
         selectedCards.Add(card);
 
         //card.transform.parent = characterPositions[card.cardCharRow - 1].selectedCardPos;
-        card.transform.parent = CheckEmptySlotSelect(card.cardCharRow - 1);
+        card.transform.parent = CheckEmptySlotSelect(true, card.cardCharRow - 1);
 
         //card.transform.DOLocalMove(Vector3.zero, 1);
         //card.transform.DOScale(Vector3.one, 1);
@@ -509,6 +538,8 @@ public class BattleManager : MonoBehaviour
 
     void CardTurnUse()
     {
+        if (hasFinished) return;
+
         if(curBattleTurnCard >= selectedCards.Count)
         {
             //curPlayerCard -= playerCardUsed;
@@ -602,6 +633,8 @@ public class BattleManager : MonoBehaviour
                     else
                     {
                         //win game
+                        FinishedBattle(true);
+                        return;
                     }
 
                 }
@@ -698,15 +731,20 @@ public class BattleManager : MonoBehaviour
             
 
             playerCardUsed++;
-        }
-        
 
+
+        }
+
+
+        selectedCards[curBattleTurnCard].cardCharacter.Attack(selectedCards[curBattleTurnCard].thisCard);
         //selectedCards.Remove(selectedCards[curBattleTurnCard]);
 
         Destroy(selectedCards[curBattleTurnCard].gameObject);
     }
     void CardTurnFinish()
     {
+        if (hasFinished) return;
+
         selectedCards.Clear();
         //player finish attacking
         print("player finish attacking");
@@ -722,7 +760,9 @@ public class BattleManager : MonoBehaviour
 
             if (enemyCurMana >= enemy.availableCards[index].cardMana)
             {
-                SpawnNewCard(enemy, enemyPositions[currentEnemies.IndexOf(enemy)].selectedCardPos);
+                //SpawnNewCard(enemy, enemyPositions[currentEnemies.IndexOf(enemy)].selectedCardPos);
+                SpawnNewCard(enemy, CheckEmptySlotSelect(false, currentEnemies[currentEnemies.IndexOf(enemy)].characterRow - 1));
+                
                 curEnemyCard--;
                 
             }
@@ -739,14 +779,19 @@ public class BattleManager : MonoBehaviour
 
     void NextRound()
     {
+        if (hasFinished) return;
+
         currentRound++;
+
+        GetComponent<AudioSource>().PlayOneShot(newRoundSound);
 
         foreach (WavesPerMission waves in currentMission.totalWaves)
         {
             if (currentWave >= currentMission.totalWaves.Count)
             {
                 //win
-                FinishedBattle();
+                FinishedBattle(true);
+                return;
             }
             else
             {
@@ -771,9 +816,16 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
-        if(currentCharacters.Count <= 0)
+
+        if (currentCharacters.Count <= 0)
         {
-            FinishedBattle();
+            FinishedBattle(false);
+            return;
+        }
+        if (currentEnemies.Count <= 0)
+        {
+            FinishedBattle(true);
+            return;
         }
 
         playerCurMana += manaAddPerRound;
@@ -800,9 +852,70 @@ public class BattleManager : MonoBehaviour
         DrawCard(2);
     }
 
-    void FinishedBattle()
+    public void FinishedBattle(bool isWin)
     {
-        GameManager.instance.ExitBattle();
+        //GameManager.instance.ExitBattle();
+        hasStarted = false;
+        hasFinished = true;
+
+        //clear players, cards and enemies
+        foreach (GameplayCharacter character in currentCharacters)
+        {
+            foreach (GameplayCardAttack cards in character.myCards.ToList())
+            {
+                if (cards != null)
+                    Destroy(cards.gameObject);
+
+            }
+
+            character.myCards.Clear();
+            if (character != null)
+                Destroy(character.gameObject);
+
+        }
+
+        foreach (GameplayCharacter character in currentEnemies)
+        {
+            foreach (GameplayCardAttack cards in character.myCards.ToList())
+            {
+                if (cards != null)
+                    Destroy(cards.gameObject);
+
+            }
+
+            character.myCards.Clear();
+            if (character != null)
+                Destroy(character.gameObject);
+
+        }
+        foreach (GameplayCardAttack cards in selectedCards)
+        {
+            if (cards != null)
+                Destroy(cards.gameObject);
+
+        }
+        currentCharacters.Clear();
+        currentEnemies.Clear();
+        selectedCards.Clear();
+
+        //sound
+        if (isWin)
+        {
+            GetComponent<AudioSource>().PlayOneShot(winSound);
+
+            //add gold if win
+            GameManager.instance.AddGold(currentMission.missionReward);
+        }
+        else
+        {
+            GetComponent<AudioSource>().PlayOneShot(loseSound);
+        }
+
+        //set UI
+        MenuSceneManager.instance.FinishBattle(isWin);
+
+        //reset mission
+        currentMission = null;
     }
 
     //CHECKS
@@ -843,19 +956,56 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    Transform CheckEmptySlotSelect(int slot)
+    Transform CheckEmptySlotSelect(bool isPlayer, int slot)
     {
-        //var count = 0;
+        var count = 0;
 
-        if (characterPositions[slot].selectedCardPos.childCount == 0)
+        if(isPlayer)
         {
-            return characterPositions[slot].selectedCardPos;
+            while (count < characterPositions[slot].selectedCardPos.Count)
+            {
+                foreach (Transform pos in characterPositions[slot].selectedCardPos)
+                {
+                    if (characterPositions[slot].selectedCardPos.IndexOf(pos) == count)
+                    {
+                        if (pos.childCount == 0)
+                        {
+                            return pos;
+                        }
+                        else
+                        {
+                            count++;
+                            //print("pos has child, restart");
+                        }
+                    }
+                }
+            }
         }
         else
         {
-            print("no pos found");
-            return null;
+            while (count < enemyPositions[slot].selectedCardPos.Count)
+            {
+                foreach (Transform pos in enemyPositions[slot].selectedCardPos)
+                {
+                    if (enemyPositions[slot].selectedCardPos.IndexOf(pos) == count)
+                    {
+                        if (pos.childCount == 0)
+                        {
+                            return pos;
+                        }
+                        else
+                        {
+                            count++;
+                            //print("pos has child, restart");
+                        }
+                    }
+                }
+            }
         }
+        
+
+        //print("no pos found");
+        return null;
     }
 
 }
@@ -863,7 +1013,7 @@ public class BattleManager : MonoBehaviour
 [Serializable]
 public class CharacterPos
 {
-    public Transform selectedCardPos;
+    public List<Transform> selectedCardPos = new List<Transform>();
     public Transform selectedCharacterPos;
     public List<Transform> cardPositions = new List<Transform>();
     //public List<GameplayCardAttack> cardPositionCards = new List<GameplayCardAttack>();

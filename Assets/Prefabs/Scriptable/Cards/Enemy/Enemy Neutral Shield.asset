@@ -19,6 +19,9 @@ MonoBehaviour:
   cardElement: 0
   cardDesc: Attack basic shield
   isEnemy: 1
+  cardAttackType: Use
+  cardAttackSound: {fileID: 8300000, guid: 5e86d6a7dabb2074ebb3e953567d510e, type: 3}
+  cardAttackEffect: {fileID: 8369644723962029865, guid: 282bcf6440ccae34d94383e174975df6, type: 3}
   cardTrueDamage: 0
   cardNormalDamage: 0
   cardHealthAdd: 0

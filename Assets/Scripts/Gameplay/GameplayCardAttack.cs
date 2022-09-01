@@ -11,12 +11,16 @@ public class GameplayCardAttack : MonoBehaviour
     bool isSelected;
     public Elements thisElement;
 
+    //sounds
+    [SerializeField] AudioClip selectSound;
+    [SerializeField] AudioClip deselectSound;
+
     public int cardCharRow;
     public int cardCharSpeed;
 
     //Battle
     public List<GameplayCharacter> selectedTarget = new List<GameplayCharacter>();
-
+    public GameplayCharacter cardCharacter;
 
     //UI Pos
     [SerializeField] Vector3 growScale;
@@ -179,6 +183,8 @@ public class GameplayCardAttack : MonoBehaviour
                 targetScale = normalScale;
 
                 SetTargets();
+
+                GetComponent<AudioSource>().PlayOneShot(selectSound);
             }
             else
             {
@@ -195,6 +201,8 @@ public class GameplayCardAttack : MonoBehaviour
         isSelected = false;
 
         BattleManager.instance.DeSelectCard(this);
+
+        GetComponent<AudioSource>().PlayOneShot(deselectSound);
     }
 
     private void OnMouseEnter()
