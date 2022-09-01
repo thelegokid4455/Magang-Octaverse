@@ -10,13 +10,33 @@ public class MenuSceneManager : MonoBehaviour
 
     //Character
     [SerializeField] List<GameplayCharacterIdle> characters = new List<GameplayCharacterIdle>();
+    [SerializeField] GameObject characterObjects;
 
     //UI
 
+    //-screens
+    [SerializeField] int selectedScreen;
+
     [SerializeField] Text currentCoinText;
 
+    //scenes
+    [SerializeField] GameObject HomeScene;
+    [SerializeField] GameObject TeamScene;
+    [SerializeField] GameObject RecruitScene;
+    [SerializeField] GameObject StoreScene;
+
+    //menus
     [SerializeField] GameObject HomeMenu;
+    [SerializeField] GameObject TeamMenu;
+    [SerializeField] GameObject RecruitMenu;
+    [SerializeField] GameObject StoreMenu;
+
+    //main menus
+    [SerializeField] GameObject BattleScene;
     [SerializeField] GameObject BattleMenu;
+    [SerializeField] GameObject MainMenu;
+
+    //finish
     [SerializeField] GameObject FinishMenu;
 
     [SerializeField] GameObject WinSign;
@@ -24,6 +44,7 @@ public class MenuSceneManager : MonoBehaviour
 
     [SerializeField] Text coinEarnText;
 
+    //transition
     public GameObject transitionObject;
 
     public static MenuSceneManager instance;
@@ -37,13 +58,53 @@ public class MenuSceneManager : MonoBehaviour
     void Start()
     {
         //SetIdleCharData();
+        selectedScreen = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        HomeMenu.SetActive(!GameManager.instance.inBattle);
-        BattleMenu.SetActive(GameManager.instance.inBattle);
+        
+
+        if (GameManager.instance.inBattle)
+        {
+            BattleMenu.SetActive(true);
+            BattleScene.SetActive(true);
+
+            MainMenu.SetActive(false);
+
+            HomeScene.SetActive(false);
+            TeamScene.SetActive(false);
+            RecruitScene.SetActive(false);
+            StoreScene.SetActive(false);
+
+            HomeMenu.SetActive(false);
+            TeamMenu.SetActive(false);
+            RecruitMenu.SetActive(false);
+            StoreMenu.SetActive(false);
+
+            characterObjects.SetActive(false);
+
+        }
+        else
+        {
+            if (selectedScreen == 1) HomeScene.SetActive(true); else HomeScene.SetActive(false);
+            if (selectedScreen == 2) TeamScene.SetActive(true); else TeamScene.SetActive(false);
+            if (selectedScreen == 3) RecruitScene.SetActive(true); else RecruitScene.SetActive(false);
+            if (selectedScreen == 4) StoreScene.SetActive(true); else StoreScene.SetActive(false);
+
+            if (selectedScreen == 1) HomeMenu.SetActive(true); else HomeMenu.SetActive(false);
+            if (selectedScreen == 2) TeamMenu.SetActive(true); else TeamMenu.SetActive(false);
+            if (selectedScreen == 3) RecruitMenu.SetActive(true); else RecruitMenu.SetActive(false);
+            if (selectedScreen == 4) StoreMenu.SetActive(true); else StoreMenu.SetActive(false);
+
+            BattleMenu.SetActive(false);
+            BattleScene.SetActive(false);
+
+            MainMenu.SetActive(true);
+
+            characterObjects.SetActive(true);
+        }
 
         currentCoinText.text = GameManager.instance.currentCoin.ToString();
     }
@@ -63,7 +124,6 @@ public class MenuSceneManager : MonoBehaviour
     }
 
     //buttons
-
     public void SelectCampaign(Mission mission)
     {
         print("Selected mission " + mission.missionName);
@@ -72,8 +132,12 @@ public class MenuSceneManager : MonoBehaviour
 
     }
 
+    public void ChangeMenu(int target)
+    {
+        selectedScreen = target;
+    }
 
-
+    //transition
     public IEnumerator TransitionAnimationStartMission(Mission mission)
     {
         transitionObject.SetActive(true);
@@ -89,6 +153,7 @@ public class MenuSceneManager : MonoBehaviour
         transitionObject.GetComponent<Animation>().Stop();
     }
 
+    //battle
     public void FinishBattle(bool isWin)
     {
         FinishMenu.SetActive(true);
@@ -97,6 +162,8 @@ public class MenuSceneManager : MonoBehaviour
 
         WinSign.SetActive(isWin);
         LoseSign.SetActive(!isWin);
+
+        selectedScreen = 1;
 
         //
 
@@ -112,5 +179,10 @@ public class MenuSceneManager : MonoBehaviour
 
         GameManager.instance.ExitBattle();
 
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

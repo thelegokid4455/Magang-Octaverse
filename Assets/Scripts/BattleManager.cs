@@ -174,16 +174,7 @@ public class BattleManager : MonoBehaviour
 
     void SpawnPlayers()
     {
-        /*
-        foreach (GameplayCharacter character in currentCharacters.ToList())
-        {
-            if (character.curHealth <= 0)
-            {
-                Destroy(character.gameObject);
-                currentEnemies.Remove(character);
-            }
-        }
-        */
+        var playerCount = 0;
 
         foreach (Character character in GameManager.instance.selectedCharacters)
         {
@@ -198,6 +189,8 @@ public class BattleManager : MonoBehaviour
             newPlayer.transform.DOScale(Vector3.one, 1);
 
             currentCharacters.Add(newPlayer.GetComponent<GameplayCharacter>());
+
+            playerCount++;
         }
 
         //SetCharacterPosition();
@@ -205,6 +198,8 @@ public class BattleManager : MonoBehaviour
 
     void SpawnEnemies()
     {
+
+        var enemyCount = 0;
         foreach (GameplayCharacter character in currentEnemies.ToList())
         {
             if (character.curHealth <= 0)
@@ -231,6 +226,8 @@ public class BattleManager : MonoBehaviour
                     newEnemy.transform.DOScale(Vector3.one, 1);
 
                     currentEnemies.Add(newEnemy.GetComponent<GameplayCharacter>());
+
+                    enemyCount++;
                 }
             }
             
@@ -256,7 +253,7 @@ public class BattleManager : MonoBehaviour
 
         curBattleTurnCard = 0;
 
-        foreach(GameplayCharacter character in currentCharacters)
+        foreach (GameplayCharacter character in currentCharacters)
         {
             //character.SetData();
             character.cardHeldThisDeckRotation = 0;
@@ -277,6 +274,26 @@ public class BattleManager : MonoBehaviour
         SetCharacterPosition();
 
         DrawCard(10);
+    }
+    void ResetStats()
+    {
+        playerCurMana = playerMaxMana;
+        curPlayerCard = playerMaxCard;
+
+        enemyCurMana = enemyMaxMana;
+        curEnemyCard = enemyMaxCard;
+
+        currentRound = 1;
+        currentPhase = 0;
+        currentWave = 0;
+
+        curPlayerDiscard = 0;
+        curEnemyDiscard = 0;
+
+        curBattleTurnCard = 0;
+
+
+        print("All data reset :)");
     }
 
     void SetCharacterPosition()
@@ -485,7 +502,6 @@ public class BattleManager : MonoBehaviour
         //card.transform.DOScale(Vector3.one, 1);
 
         playerCurMana -= card.thisCard.cardMana;
-        //print("Set card " + card.name);
     }
 
     public void DeSelectCard(GameplayCardAttack card)
@@ -501,8 +517,6 @@ public class BattleManager : MonoBehaviour
         playerCurMana += card.thisCard.cardMana;
 
         selectedCards.Remove(card);
-
-        //print("Removed card " + card.name);
     }
 
     void MoveCardToPos(GameplayCardAttack card)
@@ -516,8 +530,6 @@ public class BattleManager : MonoBehaviour
         //playerCurMana += card.thisCard.cardMana;
 
         selectedCards.Remove(card);
-
-        //print("Removed card " + card.name);
     }
 
     public void ButtonReady()
@@ -746,8 +758,8 @@ public class BattleManager : MonoBehaviour
         if (hasFinished) return;
 
         selectedCards.Clear();
+
         //player finish attacking
-        print("player finish attacking");
 
         NextRound();
     }
@@ -898,6 +910,9 @@ public class BattleManager : MonoBehaviour
         currentEnemies.Clear();
         selectedCards.Clear();
 
+        //reset
+        ResetStats();
+
         //sound
         if (isWin)
         {
@@ -945,13 +960,11 @@ public class BattleManager : MonoBehaviour
                     else
                     {
                         count++;
-                        //print("pos has child, restart");
                     }
                 }
             }
         }
-        
-        //print("no pos found");
+
         return null;
 
     }
@@ -975,7 +988,6 @@ public class BattleManager : MonoBehaviour
                         else
                         {
                             count++;
-                            //print("pos has child, restart");
                         }
                     }
                 }
@@ -996,15 +1008,12 @@ public class BattleManager : MonoBehaviour
                         else
                         {
                             count++;
-                            //print("pos has child, restart");
                         }
                     }
                 }
             }
         }
-        
 
-        //print("no pos found");
         return null;
     }
 

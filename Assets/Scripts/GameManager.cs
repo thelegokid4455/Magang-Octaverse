@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     //gold
     public int currentCoin;
 
-    public GameObject MenuScene;
-    public GameObject BattleScene;
+    //public GameObject MenuScene;
+    //public GameObject BattleScene;
     public bool inBattle;
 
     //UI
@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MenuScene.SetActive(!inBattle);
-        BattleScene.SetActive(inBattle);
+        //MenuScene.SetActive(!inBattle);
+        //BattleScene.SetActive(inBattle);
     }
 
     public void AddGold(int amount)
