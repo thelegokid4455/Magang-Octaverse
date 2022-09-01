@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e491f53cf5f61b744a8e0f0b5a868e0e, type: 3}
-  m_Name: Head Priest
+  m_Name: Weapon Tailor
   m_EditorClassIdentifier: 
   cardId: 0
-  cardName: The Truth
+  cardName: Stab and Cut
   cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
-  cardMana: 1
-  cardElement: 4
-  cardDesc: Attack with True Damage
+  cardMana: 4
+  cardElement: 5
+  cardDesc: Attack 2 characters, it will get Bleeding status
   isEnemy: 0
-  cardTrueDamage: 100
-  cardNormalDamage: 0
+  cardTrueDamage: 0
+  cardNormalDamage: 200
   cardHealthAdd: 0
-  cardShieldAdd: 100
+  cardShieldAdd: 60
   cardAttackRow1: 1
   cardAttackRow2: 0
   cardAttackRow3: 0
