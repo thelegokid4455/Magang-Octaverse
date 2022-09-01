@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
+  m_Name: Back Priest
+  m_EditorClassIdentifier: 
+  partId: 0
+  partName: Priest Cloak
+  partImage: {fileID: 21300000, guid: cd1c8cf62fead2b4dbcb6f64b080e292, type: 3}
+  partDescription: 
+  partType: 4
+  partElement: 4
+  partHealthAdd: 32
+  partSpeedAdd: 2
+  partLuckAdd: 0
+  partCard: {fileID: 11400000, guid: ab57354a1f260824eb93fc15aae238bf, type: 2}

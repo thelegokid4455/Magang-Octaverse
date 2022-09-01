@@ -7,6 +7,7 @@ public class Mission : ScriptableObject
 {
     public string missionName;
     public List<WavesPerMission> totalWaves = new List<WavesPerMission>();
+    public int missionReward;
 }
 
 [Serializable]

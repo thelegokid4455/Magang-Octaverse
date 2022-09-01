@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partId: 0
   partName: Farmers Face
-  partImage: {fileID: 21300000, guid: 0e522bed1662793439896af631834e35, type: 3}
+  partImage: {fileID: 21300000, guid: 5fa81fd8d88581546bea94d335c7ce4d, type: 3}
   partDescription: 
   partType: 1
   partElement: 3

@@ -7,10 +7,15 @@ public class Inventory : ScriptableObject
 {
     public List<Character> characterInInventory = new List<Character>();
 
-    public Character startingCharacter;
+    public List<Character> startingCharacter = new List<Character>();
 
     public void ResetInventory()
     {
+        characterInInventory.Clear();
 
+        foreach(Character character in startingCharacter)
+        {
+            characterInInventory.Add(character);
+        }
     }
 }

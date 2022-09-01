@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
+  m_Name: Face Magician
+  m_EditorClassIdentifier: 
+  partId: 0
+  partName: Magician Face
+  partImage: {fileID: 21300000, guid: d8f8ee6f55bbd0d43980edfec9effafe, type: 3}
+  partDescription: 
+  partType: 1
+  partElement: 5
+  partHealthAdd: 0
+  partSpeedAdd: 0
+  partLuckAdd: 9
+  partCard: {fileID: 11400000, guid: e276688b0bec00f49ad763eba0afbc40, type: 2}

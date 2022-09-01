@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partId: 0
   partName: Chef Wok
-  partImage: {fileID: 21300000, guid: 5d1fed4015edaf940b1e901237d686d4, type: 3}
+  partImage: {fileID: 21300000, guid: e09269dbb42652a45a4dcca7af47dab7, type: 3}
   partDescription: 
   partType: 4
   partElement: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partId: 0
   partName: Chef Hat
-  partImage: {fileID: 21300000, guid: cf9d99bac646ed04c833e5795bb0ba3b, type: 3}
+  partImage: {fileID: 21300000, guid: 53213e16777e6fb499cc462f89bc6eec, type: 3}
   partDescription: 
   partType: 3
   partElement: 1
