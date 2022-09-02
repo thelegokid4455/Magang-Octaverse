@@ -21,4 +21,4 @@ MonoBehaviour:
   partHealthAdd: 0
   partSpeedAdd: 7
   partLuckAdd: 0
-  partCard: {fileID: 11400000, guid: 112a5933e0e57234eb0eb411f96c351c, type: 2}
+  partCard: {fileID: 11400000, guid: 690b42eea3e121d47b406244aa3a63e5, type: 2}

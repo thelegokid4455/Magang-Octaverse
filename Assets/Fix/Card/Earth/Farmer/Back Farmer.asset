@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Spread the Seed
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 35c9c390258b1df4591e7d06c379def1, type: 3}
   cardMana: 4
   cardElement: 3
   cardDesc: Give Leech status to all enemy characters

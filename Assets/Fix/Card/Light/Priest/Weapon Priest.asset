@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Holy Staff
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: b044e800f0bcddc4b99ffab9831b727a, type: 3}
   cardMana: 3
   cardElement: 4
   cardDesc: All teammates characters get Cleansing Debuff

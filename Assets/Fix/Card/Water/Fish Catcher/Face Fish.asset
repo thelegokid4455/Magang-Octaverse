@@ -14,14 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Hard Catch
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 2a373be287297664a8e2e36502b757fe, type: 3}
   cardMana: 2
   cardElement: 2
   cardDesc: If the target has Chill status, give the exhaust status
   isEnemy: 0
-  cardAttackType: Attack
-  cardAttackSound: {fileID: 8300000, guid: 87b00718bd0c64b4ca59a38f6339fc81, type: 3}
-  cardAttackEffect: {fileID: 8369644723962029865, guid: 53d377bb47ab25f4c8b69671720a1114, type: 3}
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 80
   cardHealthAdd: 0

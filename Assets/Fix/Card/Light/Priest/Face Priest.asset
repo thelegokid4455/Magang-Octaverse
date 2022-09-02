@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: The Power for the Frontliner
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 5a9c400988cfe9e49aa4bde53c93b8d4, type: 3}
   cardMana: 2
   cardElement: 4
   cardDesc: Heal 150 to the frontline character

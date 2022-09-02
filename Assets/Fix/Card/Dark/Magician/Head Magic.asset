@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Magic Hat
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: e9577d17e3f8de645a72350a80eb1e4c, type: 3}
   cardMana: 1
   cardElement: 5
   cardDesc: Give the frontline character Fortune status

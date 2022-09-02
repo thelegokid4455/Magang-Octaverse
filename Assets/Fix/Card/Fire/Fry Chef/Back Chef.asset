@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Chef's Wok
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: b852adeffd2b34546bd6b01248490bd7, type: 3}
   cardMana: 2
   cardElement: 1
   cardDesc: Activate Provoke, the enemy that attack will be hit by Burn status
