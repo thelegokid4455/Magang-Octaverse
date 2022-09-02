@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e491f53cf5f61b744a8e0f0b5a868e0e, type: 3}
+  m_Name: Head Singer
+  m_EditorClassIdentifier: 
+  cardId: 0
+  cardName: Hypnotizing Voice
+  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardMana: 2
+  cardElement: 4
+  cardDesc: Attack with True Damage, if target has Sleep, Stun, or Exhaust status
+    gain Draw Bonus
+  isEnemy: 0
+  cardAttackType: 1
+  cardTrueDamage: 90
+  cardNormalDamage: 0
+  cardHealthAdd: 0
+  cardShieldAdd: 60
+  cardAttackRow1: 1
+  cardAttackRow2: 0
+  cardAttackRow3: 0
+  cardAttackRow4: 0
+  cardHealRow1: 0
+  cardHealRow2: 0
+  cardHealRow3: 0
+  cardHealRow4: 0
