@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d9b8591cc21a714eb62b44ab9cab079, type: 3}
-  m_Name: Test Enemy 2
+  m_Name: Golem
   m_EditorClassIdentifier: 
   characterId: 0
-  characterJob: Dark Miner
-  characterSprite: {fileID: 21300000, guid: 571f72323cbb7b3428343334f27b5115, type: 3}
+  characterJob: Golem
+  characterSprite: {fileID: 21300000, guid: f5a2b665baa66254d84cd5017541268d, type: 3}
   characterSpeed: 3
   isEnemy: 1
   enemyCards:
-  - {fileID: 11400000, guid: 442e973bbd39e58479cac10d75088416, type: 2}
-  - {fileID: 11400000, guid: ef51ad57e2f22e848a532c76d5b3feec, type: 2}
+  - {fileID: 11400000, guid: 5d73d40411172b444b2a062f2642c836, type: 2}
+  - {fileID: 11400000, guid: 7d3122cd60617964293489f3df021883, type: 2}
+  - {fileID: 11400000, guid: f1ab554f1d692654fb87ed83b0d88b39, type: 2}
+  - {fileID: 11400000, guid: dc382a14454a7e1428d4c06ca46b9f11, type: 2}
   characterBody: {fileID: 11400000, guid: 1582b51846566104e9a4a50d7cc1962c, type: 2}
   characterFace: {fileID: 11400000, guid: dd9b5129bea24c64892a79524ef98b12, type: 2}
   characterWeapon: {fileID: 11400000, guid: f6784d1ece05eb047a9b17289c682316, type: 2}
