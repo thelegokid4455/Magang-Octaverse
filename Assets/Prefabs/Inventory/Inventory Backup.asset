@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f7cb00a8ebd27e488bead60fe49ca05, type: 3}
-  m_Name: Inventory
+  m_Name: Inventory Backup
   m_EditorClassIdentifier: 
   maxCharactersInInventory: 10
   characterInInventory:

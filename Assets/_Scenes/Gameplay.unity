@@ -957,7 +957,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Team 2
+  m_Text: Bubble 2
 --- !u!222 &63743921
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1656,7 +1656,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Team 4
+  m_Text: Bubble 4
 --- !u!222 &153746225
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7386,7 +7386,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Team 3
+  m_Text: Bubble 3
 --- !u!222 &728995873
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12948,7 +12948,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771c953b255b10f49a813889af989d72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idlePosition: []
   charactersHome:
   - {fileID: 1733805683}
   - {fileID: 2103724252}
@@ -17626,7 +17625,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Team 1
+  m_Text: Bubble 1
 --- !u!222 &1932459094
 CanvasRenderer:
   m_ObjectHideFlags: 0

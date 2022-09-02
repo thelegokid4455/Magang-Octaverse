@@ -35,33 +35,38 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*
+        
         if(selectedCharacters.Count <= 0)
         {
             if(InventoryManager.instance.playerInventory.characterInInventory.Count >= 4)
             {
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[0]);
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[1]);
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[2]);
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[3]);
+                
+
+                var count = 0;
+
+                while(count < 4)
+                {
+                    var newChar = new Character();
+                    selectedCharacters.Add(newChar);
+
+                    newChar.characterBody = InventoryManager.instance.playerInventory.characterInInventory[count].characterBody;
+                    newChar.characterFace = InventoryManager.instance.playerInventory.characterInInventory[count].characterFace;
+                    newChar.characterWeapon = InventoryManager.instance.playerInventory.characterInInventory[count].characterWeapon;
+                    newChar.characterTop = InventoryManager.instance.playerInventory.characterInInventory[count].characterTop;
+                    newChar.characterBack = InventoryManager.instance.playerInventory.characterInInventory[count].characterBack;
+
+                    count++;
+                }
+
+                //selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[0]);
+                //selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[1]);
+                //selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[2]);
+                //selectedCharacters.Add(InventoryManager.instance.playerInventory.characterInInventory[3]);
             }
             else
             {
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[0]);
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[1]);
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[2]);
-                selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[3]);
-            }
 
-            MenuSceneManager.instance.SetCharData();
-        }
-        */
-        if (selectedCharacters.Count <= 0)
-        {
-            selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[0]);
-            selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[1]);
-            selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[2]);
-            selectedCharacters.Add(InventoryManager.instance.playerInventory.startingCharacter[3]);
+            }
 
             MenuSceneManager.instance.SetCharData();
         }
