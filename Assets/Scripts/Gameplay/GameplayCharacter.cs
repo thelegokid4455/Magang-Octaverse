@@ -13,14 +13,14 @@ public class GameplayCharacter : MonoBehaviour
     public int characterRow;
     public int characterSpeed;
 
-    public int maxHealth;
-    public int curHealth;
+    public float maxHealth;
+    public float curHealth;
 
-    public int maxShield;
-    public int curShield;
+    public float maxShield;
+    public float curShield;
 
-    int targetHealth;
-    int targetShield;
+    float targetHealth;
+    float targetShield;
 
     //gameplay
     public int cardHeldThisDeckRotation;
@@ -216,34 +216,136 @@ public class GameplayCharacter : MonoBehaviour
         animObject.GetComponent<Animation>().Play("Idle");
     }
 
-    public void ApplyTrueDamage(int dmg)
+    public void ApplyTrueDamage(Elements element, float dmg)
     {
-        curHealth -= dmg;
+        curHealth -= CountWeakness(element, dmg);
+
+        if(dmg > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.healthDamageColor, CountWeakness(element, dmg));
+
+            StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Get Hit")));
+        }
+
     }
 
-    public void ApplyNormalDamage(int dmg)
+    public void ApplyNormalDamage(Elements element, float dmg)
     {
         if (curShield <= 0)
         {
-            curHealth -= dmg;
+            curHealth -= CountWeakness(element, dmg);
 
             //print("applied normal damage " + dmg);
         }
         else
         {
-            curShield -= dmg;
+            curShield -= CountWeakness(element, dmg);
 
             //print("applied shield damage " + dmg);
         }
+
+        if(dmg > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.healthDamageColor, CountWeakness(element, dmg));
+
+            StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Get Hit")));
+        }
     }
+
+    float CountWeakness(Elements element, float dmg)
+    {
+        var gm = GameManager.instance;
+
+        if (element == Elements.Fire)
+        {
+            switch(thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return dmg;
+                case Elements.Earth: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Water: return (dmg * Mathf.RoundToInt(gm.weakenedDamagePercent / 100));
+                case Elements.Light: return dmg;
+                case Elements.Dark: return dmg;
+            }
+        }
+        else if (element == Elements.Water)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Earth: return (dmg * Mathf.RoundToInt(gm.weakenedDamagePercent / 100));
+                case Elements.Water: return dmg;
+                case Elements.Light: return dmg;
+                case Elements.Dark: return dmg;
+            }
+        }
+        else if (element == Elements.Earth)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return (dmg * Mathf.RoundToInt(gm.weakenedDamagePercent / 100));
+                case Elements.Earth: return dmg;
+                case Elements.Water: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Light: return dmg;
+                case Elements.Dark: return dmg;
+            }
+        }
+        else if (element == Elements.Light)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return dmg;
+                case Elements.Earth: return dmg;
+                case Elements.Water: return dmg;
+                case Elements.Light: return dmg;
+                case Elements.Dark: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+            }
+        }
+        else if (element == Elements.Dark)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return dmg;
+                case Elements.Earth: return dmg;
+                case Elements.Water: return dmg;
+                case Elements.Light: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Dark: return dmg;
+            }
+        }
+        else
+        {
+            return dmg;
+        }
+
+        return dmg;
+    }
+
     public void AddHealth(int value)
     {
         curHealth += value;
+
+        if (value > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.healthAddColor, value);
+        }
     }
 
     public void AddShield(int value)
     {
         curShield += value;
+
+        if (value > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.shieldAddColor, value);
+        }
     }
 
 }

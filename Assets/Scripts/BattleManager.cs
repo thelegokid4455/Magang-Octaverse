@@ -631,15 +631,15 @@ public class BattleManager : MonoBehaviour
                         {
                             if (currentCharacters.Count <= 1) return;
 
-                            currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
-                            currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
+                            currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
+                            currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
                         }
                         else
                         {
                             if (currentEnemies.Count <= 1) return;
 
-                            currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
-                            currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
+                            currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
+                            currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
                         }
                     }
                     else
@@ -652,8 +652,8 @@ public class BattleManager : MonoBehaviour
                 }
                 else
                 {
-                    targets.ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
-                    targets.ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
+                    targets.ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
+                    targets.ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
                 }
             }
         }

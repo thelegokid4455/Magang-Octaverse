@@ -15,12 +15,23 @@ public class GameManager : MonoBehaviour
     //public GameObject BattleScene;
     public bool inBattle;
 
+    //element
+    public float weakenedDamagePercent;
+    public float strongerDamagePercent;
+
     //effects
     public GameObject attackEffect;
     public AudioClip attackEffectSound;
 
     public GameObject useEffect;
     public AudioClip useEffectSound;
+
+    public GameObject damageTextEffect;
+
+    //colors
+    public Color healthDamageColor;
+    public Color healthAddColor;
+    public Color shieldAddColor;
 
     //UI
     public Sprite neutralCardBase;

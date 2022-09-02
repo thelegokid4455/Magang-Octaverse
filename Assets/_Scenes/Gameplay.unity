@@ -4006,6 +4006,81 @@ Transform:
   m_Father: {fileID: 1777673510}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &360062702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360062703}
+  - component: {fileID: 360062706}
+  m_Layer: 0
+  m_Name: Player Came
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &360062703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360062702}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &360062706
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360062702}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.28773582, g: 0.8107111, b: 1, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 64
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 0
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 0
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &363167250
 GameObject:
   m_ObjectHideFlags: 0
@@ -6427,10 +6502,10 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6453,7 +6528,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 360062703}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6707,29 +6783,67 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 30ff92db1ae3594448f1fd3bd1b5d3bb, type: 2}
   - {fileID: 11400000, guid: 10fbda41712fb2142a178bc036f5fde4, type: 2}
   allCharacterFace:
+  - {fileID: 11400000, guid: 49c5a021a3404cb45bdcb29e6af99311, type: 2}
   - {fileID: 11400000, guid: dd9b5129bea24c64892a79524ef98b12, type: 2}
+  - {fileID: 11400000, guid: cc57309b9868a0c438be71fd31346114, type: 2}
+  - {fileID: 11400000, guid: 0196e33aab9ecb048862cc155d0a2bda, type: 2}
+  - {fileID: 11400000, guid: 2e41295723ffc704eb682e9e39aab020, type: 2}
+  - {fileID: 11400000, guid: c23dbbcd46f8c5d48a61a87e07c5fcb5, type: 2}
   - {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}
   - {fileID: 11400000, guid: 022f2dfe72a0bca4e8d232f767f9bfa4, type: 2}
+  - {fileID: 11400000, guid: 3f626c4eedae6974386fc213363f9d8f, type: 2}
   - {fileID: 11400000, guid: 2ae7f77535d5a884b97a7c87a5d0de5e, type: 2}
+  - {fileID: 11400000, guid: 979b65a91550b9f41b0a2fb0695dc65d, type: 2}
+  - {fileID: 11400000, guid: e1311c0ac80fdf547b44231e4548e3ff, type: 2}
   - {fileID: 11400000, guid: 005c12f02f7fcd846a4fedf0a91ca751, type: 2}
+  - {fileID: 11400000, guid: 3f9ed2524be783d4ca75f63b3ff744de, type: 2}
+  - {fileID: 11400000, guid: 940100622510051429db3c8fbf65d098, type: 2}
   allCharacterWeapon:
+  - {fileID: 11400000, guid: 509706aa5396a0945b79419f4591564c, type: 2}
   - {fileID: 11400000, guid: f6784d1ece05eb047a9b17289c682316, type: 2}
+  - {fileID: 11400000, guid: 8c53952bb19620f42af1598d9552e6ea, type: 2}
+  - {fileID: 11400000, guid: dea49b0a31a1c2440b3febadbfde8a80, type: 2}
+  - {fileID: 11400000, guid: 90f3606eac14e0e418a8649e7ec07eed, type: 2}
   - {fileID: 11400000, guid: f5c7e2fa6f638de4599f52dd851648dc, type: 2}
   - {fileID: 11400000, guid: beceeec3345eeb94ebe9743d5ea5db0e, type: 2}
+  - {fileID: 11400000, guid: e4658a5b27afe6d4a873897bfde4fd34, type: 2}
   - {fileID: 11400000, guid: d9cd4fe757cc90a489508532238eb9c5, type: 2}
+  - {fileID: 11400000, guid: 676bc7a260e05d14a9ce4993201b7e03, type: 2}
   - {fileID: 11400000, guid: 1a9755bf684d70e43b53de043978e444, type: 2}
+  - {fileID: 11400000, guid: 7b8300273a5e47c4881c199d2737d141, type: 2}
+  - {fileID: 11400000, guid: c6875ed3780c7b646b1f1e00aee6d6dc, type: 2}
   allCharacterTop:
+  - {fileID: 11400000, guid: 2bed9dd63d50ea9428d142da1822acf5, type: 2}
   - {fileID: 11400000, guid: eb5c39ac8942af845999043de5f97a9b, type: 2}
+  - {fileID: 11400000, guid: fcc479765813e9d4f89beb274bde187b, type: 2}
+  - {fileID: 11400000, guid: 914f8e6ac8320b74484c46ca56094940, type: 2}
+  - {fileID: 11400000, guid: f0fcf0a26a3f599459eed13af9365961, type: 2}
+  - {fileID: 11400000, guid: 28983d57fdf502147b78bcc768b4216d, type: 2}
   - {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
   - {fileID: 11400000, guid: 2a9b9b2a0012d2b47be7e4f6e5c91ea5, type: 2}
+  - {fileID: 11400000, guid: 0f4efb6189ceccc4e827b020731eb998, type: 2}
   - {fileID: 11400000, guid: b8f9861d48f45094b8b4cba79cd73fa4, type: 2}
+  - {fileID: 11400000, guid: af572e6485d946644bb7d8376d8257b6, type: 2}
+  - {fileID: 11400000, guid: 9924d2c1475942643b702fd04a5f6ff8, type: 2}
   - {fileID: 11400000, guid: 87df944a15f578c489d3b5ef7de81e09, type: 2}
+  - {fileID: 11400000, guid: ff7bd1c2d9004974ebffc2a32a669baf, type: 2}
+  - {fileID: 11400000, guid: 87be99c1436f1fd469d4867fcbab38ce, type: 2}
   allCharacterBack:
+  - {fileID: 11400000, guid: 1449080572ee5694788ee9b229bead03, type: 2}
   - {fileID: 11400000, guid: b4c2716f8ed357f4bb169da729401dc6, type: 2}
+  - {fileID: 11400000, guid: 3ce8fd8d797da1349829adc6d8f3c6b6, type: 2}
+  - {fileID: 11400000, guid: fa227d024f664004785a13be688fc9c5, type: 2}
+  - {fileID: 11400000, guid: 116b288a3ff75fb4faa0b778269c35f3, type: 2}
+  - {fileID: 11400000, guid: 1b55a15de3a4d9e47a8a7aa39b7a584d, type: 2}
   - {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
   - {fileID: 11400000, guid: fb18058e771dd034ba06f38865f2156f, type: 2}
+  - {fileID: 11400000, guid: 3f97ef74530d6ae468f536b571b2b1c1, type: 2}
   - {fileID: 11400000, guid: 752212357ebb59f4d80a5c59b40c70fe, type: 2}
+  - {fileID: 11400000, guid: 4379d7c32f215954c9d73aee54a3530a, type: 2}
+  - {fileID: 11400000, guid: 082553280aa7f6243ad7c9f838bea24c, type: 2}
   - {fileID: 11400000, guid: 9e88f5beddfdb804b998b626195632b4, type: 2}
+  - {fileID: 11400000, guid: d73b254653aeb014a933ed097c06f57f, type: 2}
+  - {fileID: 11400000, guid: ae7deb484be2ccf40a25bafc92a92540, type: 2}
 --- !u!1 &556566475
 GameObject:
   m_ObjectHideFlags: 0
@@ -15188,16 +15302,22 @@ MonoBehaviour:
   selectedCharacters: []
   currentMoney: 0
   inBattle: 0
+  weakenedDamagePercent: 85
+  strongerDamagePercent: 115
   attackEffect: {fileID: 8369644723962029865, guid: 53d377bb47ab25f4c8b69671720a1114, type: 3}
   attackEffectSound: {fileID: 8300000, guid: 87b00718bd0c64b4ca59a38f6339fc81, type: 3}
   useEffect: {fileID: 8369644723962029865, guid: 282bcf6440ccae34d94383e174975df6, type: 3}
   useEffectSound: {fileID: 8300000, guid: 5e86d6a7dabb2074ebb3e953567d510e, type: 3}
-  neutralCardBase: {fileID: 21300000, guid: ced389d17e3add742b8130997e379be5, type: 3}
-  fireCardBase: {fileID: 21300000, guid: 3bb5f765a7ad87f48b371d70b57dc1ee, type: 3}
-  waterCardBase: {fileID: 21300000, guid: d5e0e8fb66bcd4744924182c8407fa47, type: 3}
-  earthCardBase: {fileID: 21300000, guid: 41009dc9a937493489f7eabe7726121c, type: 3}
-  lightCardBase: {fileID: 21300000, guid: 826bd32fa9fb6734a88cf7b75e98767e, type: 3}
-  darkCardBase: {fileID: 21300000, guid: a47c31bc8a0a8a649b860e7474801f4a, type: 3}
+  damageTextEffect: {fileID: 8504016298667331155, guid: cb90cacd8da136840bc7a8d64fabcb66, type: 3}
+  healthDamageColor: {r: 0.8396226, g: 0.19406372, b: 0.24028449, a: 1}
+  healthAddColor: {r: 0.53688073, g: 1, b: 0.514151, a: 1}
+  shieldAddColor: {r: 0.24056602, g: 0.7198261, b: 1, a: 1}
+  neutralCardBase: {fileID: 21300000, guid: f292eb6ba47180f43b621eef37d6d6e5, type: 3}
+  fireCardBase: {fileID: 21300000, guid: 81189fa1d811bbd43a7958e8f867e15a, type: 3}
+  waterCardBase: {fileID: 21300000, guid: 651ca6f6b0dbc5a4e9d1c22dde936128, type: 3}
+  earthCardBase: {fileID: 21300000, guid: 495c2eda84ce4784494f6e5c9891e1d8, type: 3}
+  lightCardBase: {fileID: 21300000, guid: 8d327a15da5b3b7439b0eb2b9073db7f, type: 3}
+  darkCardBase: {fileID: 21300000, guid: 5c8600940927ab44597c488344e23120, type: 3}
   battleCard: {fileID: 6633600378076083852, guid: d406645fbd9461643a4ad8f7890f58dc, type: 3}
   battleCharacter: {fileID: 6666759800274823333, guid: e12b0c960580e894f973f514a6c3dbad, type: 3}
 --- !u!1 &1478042645
