@@ -15,11 +15,13 @@ MonoBehaviour:
   missionName: test mission for dev
   totalWaves:
   - enemyToSpawn:
-    - {fileID: 11400000, guid: b2c9a47bbde87d3469df1feab66b68c9, type: 2}
     - {fileID: 11400000, guid: db07acc9d4836da4784dfe6555019191, type: 2}
-    - {fileID: 11400000, guid: b2c9a47bbde87d3469df1feab66b68c9, type: 2}
+    - {fileID: 11400000, guid: db07acc9d4836da4784dfe6555019191, type: 2}
+    - {fileID: 11400000, guid: db07acc9d4836da4784dfe6555019191, type: 2}
+    - {fileID: 11400000, guid: f3e8796bffe9a7f49b0e1084d4cee49b, type: 2}
   - enemyToSpawn:
-    - {fileID: 11400000, guid: b2c9a47bbde87d3469df1feab66b68c9, type: 2}
+    - {fileID: 11400000, guid: 8a3be5872b1321f4b93c796abd662c22, type: 2}
     - {fileID: 11400000, guid: db07acc9d4836da4784dfe6555019191, type: 2}
     - {fileID: 11400000, guid: db07acc9d4836da4784dfe6555019191, type: 2}
-  missionReward: 600
+    - {fileID: 11400000, guid: f3e8796bffe9a7f49b0e1084d4cee49b, type: 2}
+  missionReward: 240
