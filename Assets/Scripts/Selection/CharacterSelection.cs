@@ -17,6 +17,8 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] Image spriteTop;
     [SerializeField] Image spriteBack;
 
+    [SerializeField] bool isTeam;
+
     public void SetSelectionCharData(BodyPart body, BodyPart face, BodyPart weapon, BodyPart top, BodyPart back)
     {
         characterBody = body;
@@ -39,6 +41,13 @@ public class CharacterSelection : MonoBehaviour
 
     public void ClickThisCharacter()
     {
-        TeamManager.instance.SelectThisCharacter(this);
+        if(isTeam)
+        {
+            TeamManager.instance.SelectThisCharacter(this);
+        }
+        else
+        {
+            RecruitManager.instance.SelectThisCharacter(this);
+        }
     }
 }

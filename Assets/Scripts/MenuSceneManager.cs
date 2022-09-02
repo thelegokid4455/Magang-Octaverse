@@ -163,6 +163,8 @@ public class MenuSceneManager : MonoBehaviour
     public void ChangeMenu(int target)
     {
         selectedScreen = target;
+
+        RecruitManager.instance.SetData();
     }
 
     //transition

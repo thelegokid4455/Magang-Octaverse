@@ -91,7 +91,16 @@ public class GameplayCardAttack : MonoBehaviour
             nameText.text = thisCard.cardName;
             imageSprite.sprite = thisCard.cardIllust;
             manaText.text = thisCard.cardMana.ToString();
-            damageText.text = thisCard.cardNormalDamage.ToString();
+            
+            if(thisCard.cardTrueDamage > 0)
+            {
+                damageText.text = thisCard.cardTrueDamage.ToString();
+            }
+            else
+            {
+                damageText.text = thisCard.cardNormalDamage.ToString();
+            }
+
             shieldText.text = thisCard.cardShieldAdd.ToString();
             descText.text = thisCard.cardDesc;
 

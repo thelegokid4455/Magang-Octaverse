@@ -188,18 +188,18 @@ public class GameplayCharacter : MonoBehaviour
     public void Attack(Card attackCard)
     {
         animObject.GetComponent<Animation>().Stop();
-        if(attackCard.cardAttackType == "Use")
+        if(attackCard.cardAttackType == AttackType.Magic)
         {
             StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Attack Use")));
 
         }
-        else if (attackCard.cardAttackType == "Attack")
+        else if (attackCard.cardAttackType == AttackType.Slash)
         {
             StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Attack Melee")));
         }
 
-        GetComponent<AudioSource>().PlayOneShot(attackCard.cardAttackSound);
-        var effect = Instantiate(attackCard.cardAttackEffect, transform.position, transform.rotation);
+        GetComponent<AudioSource>().PlayOneShot(GameManager.instance.GetAttackSound(attackCard.cardAttackType));
+        var effect = Instantiate(GameManager.instance.GetAttackEffect(attackCard.cardAttackType), transform.position, transform.rotation);
         effect.transform.localScale = new Vector3(transform.lossyScale.x, 1, 1);
 
     }

@@ -15,6 +15,13 @@ public class GameManager : MonoBehaviour
     //public GameObject BattleScene;
     public bool inBattle;
 
+    //effects
+    public GameObject attackEffect;
+    public AudioClip attackEffectSound;
+
+    public GameObject useEffect;
+    public AudioClip useEffectSound;
+
     //UI
     public Sprite neutralCardBase;
     public Sprite fireCardBase;
@@ -87,16 +94,20 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
+
+    //data
     public bool HasEnoughMoney(int compare)
     {
-        if (currentMoney >= compare) return true;
+        if (currentMoney >= compare) 
+            return true;
         return false;
     }
     public void AddGold(int amount)
     {
         currentMoney += amount;
     }
-
+    
+    //battle
     public void EnterBattle()
     {
         //StartCoroutine(TransitionAnimationStart());
@@ -115,6 +126,29 @@ public class GameManager : MonoBehaviour
 
         BattleManager.instance.currentMission = null;
         BattleManager.instance.hasFinished = false;
+    }
+
+    public AudioClip GetAttackSound(AttackType type)
+    {
+        if (type == AttackType.Slash)
+        {
+            return attackEffectSound;
+        }
+        else
+        {
+            return useEffectSound;
+        }
+    }
+    public GameObject GetAttackEffect(AttackType type)
+    {
+        if (type == AttackType.Slash)
+        {
+            return attackEffect;
+        }
+        else
+        {
+            return useEffect;
+        }
     }
 
 }
@@ -146,4 +180,10 @@ public enum BodyParts
     Weapon,
     Top,
     Back
+}
+
+public enum AttackType
+{
+    Slash,
+    Magic
 }

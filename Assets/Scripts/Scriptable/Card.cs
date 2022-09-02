@@ -13,9 +13,7 @@ public class Card : ScriptableObject
 
     public bool isEnemy;
 
-    public string cardAttackType = "Attack";
-    public AudioClip cardAttackSound;
-    public GameObject cardAttackEffect;
+    public AttackType cardAttackType;
 
     public int cardTrueDamage;
     public int cardNormalDamage;
