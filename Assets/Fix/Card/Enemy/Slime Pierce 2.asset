@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Slime Long Pierce
-  cardIllust: {fileID: 21300000, guid: 9b0be4ef9a8e4b34eaa96ebc919f52a0, type: 3}
+  cardIllust: {fileID: 21300000, guid: 2a373be287297664a8e2e36502b757fe, type: 3}
   cardMana: 3
   cardElement: 0
   cardDesc: Attack 3 character
@@ -32,3 +32,6 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 0
+    activatedAilment: {fileID: 0}

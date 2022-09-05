@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 1
   cardDesc: Attacking 2 characters, the frontline target get Burn status
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 110
   cardHealthAdd: 0
@@ -31,3 +32,6 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 0
+    activatedAilment: {fileID: 11400000, guid: 42b31f0e3487c084f858947968882b8f, type: 2}

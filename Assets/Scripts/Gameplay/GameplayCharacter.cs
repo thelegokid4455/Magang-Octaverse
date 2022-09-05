@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +29,9 @@ public class GameplayCharacter : MonoBehaviour
     public List<GameplayCardAttack> myCards = new List<GameplayCardAttack>();
     public List<Card> availableCards = new List<Card>();
 
+    //buffs
+    public List<ActiveAilments> activeAilments = new List<ActiveAilments>();
+
     //sprites
     [SerializeField] GameObject animObject;
 
@@ -46,6 +51,31 @@ public class GameplayCharacter : MonoBehaviour
     //UI
     [SerializeField] Slider healthBar;
     [SerializeField] Slider shieldBar;
+
+    [SerializeField] Image effect_Bleed;
+    [SerializeField] Image effect_Blind;
+    [SerializeField] Image effect_Break;
+    [SerializeField] Image effect_Burn;
+    [SerializeField] Image effect_Chill;
+    [SerializeField] Image effect_Cursed;
+    [SerializeField] Image effect_Exhausted;
+    [SerializeField] Image effect_Leech;
+    [SerializeField] Image effect_Poison;
+    [SerializeField] Image effect_Provoke;
+    [SerializeField] Image effect_Sleep;
+    [SerializeField] Image effect_Stun;
+    [SerializeField] Image effect_Absorb;
+    [SerializeField] Image effect_Berserk;
+    [SerializeField] Image effect_Fortune;
+    [SerializeField] Image effect_Regeneration;
+    [SerializeField] Image effect_Toughness;
+    [SerializeField] Image effect_Cleansing;
+    [SerializeField] Image effect_DestroyMana;
+    [SerializeField] Image effect_Draw;
+    [SerializeField] Image effect_Heal;
+    [SerializeField] Image effect_ManaBonus;
+    [SerializeField] Image effect_Reposition;
+    [SerializeField] Image effect_StealMana;
 
     // Start is called before the first frame update
     void Awake()
@@ -348,4 +378,103 @@ public class GameplayCharacter : MonoBehaviour
         }
     }
 
+    public void AddAilment(Ailments newBuff)
+    {
+        var a = new ActiveAilments();
+        a.ailmentType = newBuff;
+        a.ailmentCurrentRounds = newBuff.ailmentMaxTurns;
+        activeAilments.Add(a);
+    }
+
+    public void ApplyAilment()
+    {
+        foreach (ActiveAilments ailment in activeAilments.ToList())
+        {
+            AilmentShow();
+            if (ailment.ailmentCurrentRounds <= 0)
+            {
+                activeAilments.Remove(ailment);
+                return;
+            }
+
+            ApplyTrueDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentTrueDamage);
+            ApplyNormalDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentNormalDamage);
+
+            AddHealth(ailment.ailmentType.ailmentHealthAdd);
+            AddShield(ailment.ailmentType.ailmentShieldAdd);
+
+            ailment.ailmentCurrentRounds--;
+        }
+    }
+
+    public void AilmentShow()
+    {
+        foreach (ActiveAilments ailment in activeAilments)
+        {
+            if(ailment.ailmentCurrentRounds > 0)
+            {
+                effect_Bleed.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Bleeding);
+                effect_Blind.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Blind);
+                effect_Break.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Break);
+                effect_Burn.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Burn);
+                effect_Chill.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Chill);
+                effect_Cursed.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Cursed);
+                effect_Exhausted.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Exhausted);
+                effect_Leech.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Leech);
+                effect_Poison.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Poison);
+                effect_Provoke.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Provoke);
+                effect_Sleep.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Sleep);
+                effect_Stun.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Stun);
+                effect_Absorb.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Absorb);
+                effect_Berserk.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Berserk);
+                effect_Fortune.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Fortune);
+                effect_Regeneration.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Regeneration);
+                effect_Toughness.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Toughness);
+                effect_Cleansing.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.CleansingBuff);
+                effect_DestroyMana.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.DestroyMana);
+                effect_Draw.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.DrawCard);
+                effect_Heal.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Heal);
+                effect_ManaBonus.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.ManaBonus);
+                effect_StealMana.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.StealMana);
+                effect_Reposition.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Reposition);
+
+            }
+            else
+            {
+                effect_Bleed.gameObject.SetActive(false);
+                effect_Blind.gameObject.SetActive(false);
+                effect_Break.gameObject.SetActive(false);
+                effect_Burn.gameObject.SetActive(false);
+                effect_Chill.gameObject.SetActive(false);
+                effect_Cursed.gameObject.SetActive(false);
+                effect_Exhausted.gameObject.SetActive(false);
+                effect_Leech.gameObject.SetActive(false);
+                effect_Poison.gameObject.SetActive(false);
+                effect_Provoke.gameObject.SetActive(false);
+                effect_Sleep.gameObject.SetActive(false);
+                effect_Stun.gameObject.SetActive(false);
+                effect_Absorb.gameObject.SetActive(false);
+                effect_Berserk.gameObject.SetActive(false);
+                effect_Fortune.gameObject.SetActive(false);
+                effect_Regeneration.gameObject.SetActive(false);
+                effect_Toughness.gameObject.SetActive(false);
+                effect_Cleansing.gameObject.SetActive(false);
+                effect_DestroyMana.gameObject.SetActive(false);
+                effect_Draw.gameObject.SetActive(false);
+                effect_Heal.gameObject.SetActive(false);
+                effect_ManaBonus.gameObject.SetActive(false);
+                effect_StealMana.gameObject.SetActive(false);
+                effect_Reposition.gameObject.SetActive(false);
+            }
+        }
+    }
+
+}
+
+[Serializable]
+public class ActiveAilments
+{
+    public Ailments ailmentType;
+
+    public int ailmentCurrentRounds;
 }

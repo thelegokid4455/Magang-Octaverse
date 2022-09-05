@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Golem Attack
-  cardIllust: {fileID: 21300000, guid: 9b0be4ef9a8e4b34eaa96ebc919f52a0, type: 3}
+  cardIllust: {fileID: 21300000, guid: 4e595455ac904954caf0c7adbce39553, type: 3}
   cardMana: 2
   cardElement: 0
   cardDesc: 
@@ -32,3 +32,6 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 0
+    activatedAilment: {fileID: 0}

@@ -198,3 +198,34 @@ public enum AttackType
     Slash,
     Magic
 }
+
+public enum AilmentType
+{
+    None,
+    Stun,
+    Leech,
+    Poison,
+    Sleep,
+    Bleeding,
+    Blind,
+    Chill,
+    Burn,
+    Cursed,
+    Exhausted,
+    Provoke,
+
+    Regeneration,
+    Toughness,
+    Fortune,
+    Berserk,
+    Absorb,
+
+    Heal,
+    CleansingBuff,
+    DrawCard,
+    ManaBonus,
+    StealMana,
+    DestroyMana,
+    Reposition,
+    Break
+}

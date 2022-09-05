@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07474477699b9f948905fd6a6613704b, type: 3}
+  m_Name: Burn
+  m_EditorClassIdentifier: 
+  ailmentNames: 8
+  ailmentElement: 0
+  ailmentMaxTurns: 2
+  ailmentTrueDamage: 35
+  ailmentNormalDamage: 0
+  ailmentHealthAdd: 0
+  ailmentShieldAdd: 0
+  ailmentManaAdd: 0
+  cleanseAll: 0
+  drawCard: 0
+  shieldBreak: 0

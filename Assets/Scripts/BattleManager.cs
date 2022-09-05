@@ -633,6 +633,8 @@ public class BattleManager : MonoBehaviour
 
                             currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
                             currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
+
+                            
                         }
                         else
                         {
@@ -640,6 +642,9 @@ public class BattleManager : MonoBehaviour
 
                             currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyTrueDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardTrueDamage);
                             currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets) + 1].ApplyNormalDamage(selectedCards[curBattleTurnCard].thisCard.cardElement, selectedCards[curBattleTurnCard].thisCard.cardNormalDamage);
+
+                            
+                            
                         }
                     }
                     else
@@ -740,6 +745,35 @@ public class BattleManager : MonoBehaviour
                     currentCharacters[3].AddHealth(selectedCards[curBattleTurnCard].thisCard.cardHealthAdd);
                 else return;
             }
+            foreach (GameplayCharacter targets in selectedCards[curBattleTurnCard].selectedTarget.ToList())
+            {
+                //ailments
+                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment != null)
+                {
+                    print("there is ailment to add");
+                    if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement == AilmentType.None)
+                    {
+                        print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
+                        currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                    }
+                    else
+                    {
+                        foreach (ActiveAilments buff in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments)
+                        {
+                            if (buff.ailmentType.ailmentNames == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement)
+                            {
+                                print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name + " because of " + buff.ailmentType.ailmentNames);
+                                currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+
+                    print("there is no ailment to add");
+                }
+            }
             
 
             playerCardUsed++;
@@ -751,6 +785,15 @@ public class BattleManager : MonoBehaviour
         selectedCards[curBattleTurnCard].cardCharacter.Attack(selectedCards[curBattleTurnCard].thisCard);
         //selectedCards.Remove(selectedCards[curBattleTurnCard]);
 
+        foreach (GameplayCharacter character in currentCharacters)
+        {
+            character.AilmentShow();
+        }
+        foreach (GameplayCharacter character in currentEnemies)
+        {
+            character.AilmentShow();
+        }
+
         Destroy(selectedCards[curBattleTurnCard].gameObject);
     }
     void CardTurnFinish()
@@ -760,6 +803,8 @@ public class BattleManager : MonoBehaviour
         selectedCards.Clear();
 
         //player finish attacking
+
+        ApplyAilments();
 
         NextRound();
     }
@@ -789,11 +834,32 @@ public class BattleManager : MonoBehaviour
 
     //END
 
+    void ApplyAilments()
+    {
+        foreach (GameplayCharacter character in currentCharacters)
+        {
+            character.ApplyAilment();
+        }
+        foreach (GameplayCharacter character in currentEnemies)
+        {
+            character.ApplyAilment();
+        }
+    }
+
     void NextRound()
     {
         if (hasFinished) return;
 
         currentRound++;
+
+        foreach (GameplayCharacter character in currentCharacters)
+        {
+            character.AilmentShow();
+        }
+        foreach (GameplayCharacter character in currentEnemies)
+        {
+            character.AilmentShow();
+        }
 
         GetComponent<AudioSource>().PlayOneShot(newRoundSound);
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Gameplay/Card")]
 public class Card : ScriptableObject
@@ -32,4 +33,14 @@ public class Card : ScriptableObject
     public bool cardHealRow2;
     public bool cardHealRow3;
     public bool cardHealRow4;
+
+    //buffs requirements
+    public CardAilmentRequirement cardAilmentRequirements;
+}
+
+[Serializable]
+public class CardAilmentRequirement
+{
+    public AilmentType activeRequirement;
+    public Ailments activatedAilment;
 }
