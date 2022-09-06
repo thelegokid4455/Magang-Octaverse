@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7cb00a8ebd27e488bead60fe49ca05, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
+  maxCharactersInInventory: 10
   characterInInventory:
   - characterBody: {fileID: 11400000, guid: 38a633ecbeb7d6f42a61cde10b579d8b, type: 2}
     characterFace: {fileID: 11400000, guid: 78770074bfd21c94fbaad4a644292f91, type: 2}

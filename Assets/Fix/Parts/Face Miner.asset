@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84323cf30cd3c3c489e26591f9fa6141, type: 3}
+  m_Name: Face Miner
+  m_EditorClassIdentifier: 
+  partId: 0
+  partName: Miner Face
+  partImage: {fileID: 21300000, guid: aef355ed472ca6d41a3880d52655eeef, type: 3}
+  partDescription: 
+  partType: 1
+  partElement: 3
+  partHealthAdd: 0
+  partSpeedAdd: 0
+  partLuckAdd: 7
+  partCard: {fileID: 11400000, guid: fd126e4a12a9a0243ad0d8ff4b166504, type: 2}

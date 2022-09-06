@@ -36,6 +36,17 @@ public class GameplayCharacterIdle : MonoBehaviour
         
     }
 
+    public void SetIdleCharData(BodyPart body, BodyPart face, BodyPart weapon, BodyPart top, BodyPart back)
+    {
+        characterBody = body;
+        characterFace = face;
+        characterWeapon = weapon;
+        characterTop = top;
+        characterBack = back;
+
+        SetIdleImage();
+    }
+
     public void SetIdleImage()
     {
         //set image

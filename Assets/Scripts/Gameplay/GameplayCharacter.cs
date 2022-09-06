@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,19 +15,22 @@ public class GameplayCharacter : MonoBehaviour
     public int characterRow;
     public int characterSpeed;
 
-    public int maxHealth;
-    public int curHealth;
+    public float maxHealth;
+    public float curHealth;
 
-    public int maxShield;
-    public int curShield;
+    public float maxShield;
+    public float curShield;
 
-    int targetHealth;
-    int targetShield;
+    float targetHealth;
+    float targetShield;
 
     //gameplay
     public int cardHeldThisDeckRotation;
     public List<GameplayCardAttack> myCards = new List<GameplayCardAttack>();
     public List<Card> availableCards = new List<Card>();
+
+    //buffs
+    public List<ActiveAilments> activeAilments = new List<ActiveAilments>();
 
     //sprites
     [SerializeField] GameObject animObject;
@@ -46,6 +51,31 @@ public class GameplayCharacter : MonoBehaviour
     //UI
     [SerializeField] Slider healthBar;
     [SerializeField] Slider shieldBar;
+
+    [SerializeField] Image effect_Bleed;
+    [SerializeField] Image effect_Blind;
+    [SerializeField] Image effect_Break;
+    [SerializeField] Image effect_Burn;
+    [SerializeField] Image effect_Chill;
+    [SerializeField] Image effect_Cursed;
+    [SerializeField] Image effect_Exhausted;
+    [SerializeField] Image effect_Leech;
+    [SerializeField] Image effect_Poison;
+    [SerializeField] Image effect_Provoke;
+    [SerializeField] Image effect_Sleep;
+    [SerializeField] Image effect_Stun;
+    [SerializeField] Image effect_Absorb;
+    [SerializeField] Image effect_Berserk;
+    [SerializeField] Image effect_Fortune;
+    [SerializeField] Image effect_Regeneration;
+    [SerializeField] Image effect_Toughness;
+    [SerializeField] Image effect_Cleansing;
+    [SerializeField] Image effect_DestroyMana;
+    [SerializeField] Image effect_Draw;
+    [SerializeField] Image effect_Heal;
+    [SerializeField] Image effect_ManaBonus;
+    [SerializeField] Image effect_Reposition;
+    [SerializeField] Image effect_StealMana;
 
     // Start is called before the first frame update
     void Awake()
@@ -188,18 +218,18 @@ public class GameplayCharacter : MonoBehaviour
     public void Attack(Card attackCard)
     {
         animObject.GetComponent<Animation>().Stop();
-        if(attackCard.cardAttackType == "Use")
+        if(attackCard.cardAttackType == AttackType.Magic)
         {
             StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Attack Use")));
 
         }
-        else if (attackCard.cardAttackType == "Attack")
+        else if (attackCard.cardAttackType == AttackType.Slash)
         {
             StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Attack Melee")));
         }
 
-        GetComponent<AudioSource>().PlayOneShot(attackCard.cardAttackSound);
-        var effect = Instantiate(attackCard.cardAttackEffect, transform.position, transform.rotation);
+        GetComponent<AudioSource>().PlayOneShot(GameManager.instance.GetAttackSound(attackCard.cardAttackType));
+        var effect = Instantiate(GameManager.instance.GetAttackEffect(attackCard.cardAttackType), transform.position, transform.rotation);
         effect.transform.localScale = new Vector3(transform.lossyScale.x, 1, 1);
 
     }
@@ -216,34 +246,235 @@ public class GameplayCharacter : MonoBehaviour
         animObject.GetComponent<Animation>().Play("Idle");
     }
 
-    public void ApplyTrueDamage(int dmg)
+    public void ApplyTrueDamage(Elements element, float dmg)
     {
-        curHealth -= dmg;
+        curHealth -= CountWeakness(element, dmg);
+
+        if(dmg > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.healthDamageColor, CountWeakness(element, dmg));
+
+            StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Get Hit")));
+        }
+
     }
 
-    public void ApplyNormalDamage(int dmg)
+    public void ApplyNormalDamage(Elements element, float dmg)
     {
         if (curShield <= 0)
         {
-            curHealth -= dmg;
+            curHealth -= CountWeakness(element, dmg);
 
             //print("applied normal damage " + dmg);
         }
         else
         {
-            curShield -= dmg;
+            curShield -= CountWeakness(element, dmg);
 
             //print("applied shield damage " + dmg);
         }
+
+        if(dmg > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.healthDamageColor, CountWeakness(element, dmg));
+
+            StartCoroutine(AttackAnim(animObject.GetComponent<Animation>().GetClip("Get Hit")));
+        }
     }
+
+    float CountWeakness(Elements element, float dmg)
+    {
+        var gm = GameManager.instance;
+
+        if (element == Elements.Fire)
+        {
+            switch(thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return dmg;
+                case Elements.Earth: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Water: return (dmg * Mathf.RoundToInt(gm.weakenedDamagePercent / 100));
+                case Elements.Light: return dmg;
+                case Elements.Dark: return dmg;
+            }
+        }
+        else if (element == Elements.Water)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Earth: return (dmg * Mathf.RoundToInt(gm.weakenedDamagePercent / 100));
+                case Elements.Water: return dmg;
+                case Elements.Light: return dmg;
+                case Elements.Dark: return dmg;
+            }
+        }
+        else if (element == Elements.Earth)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return (dmg * Mathf.RoundToInt(gm.weakenedDamagePercent / 100));
+                case Elements.Earth: return dmg;
+                case Elements.Water: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Light: return dmg;
+                case Elements.Dark: return dmg;
+            }
+        }
+        else if (element == Elements.Light)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return dmg;
+                case Elements.Earth: return dmg;
+                case Elements.Water: return dmg;
+                case Elements.Light: return dmg;
+                case Elements.Dark: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+            }
+        }
+        else if (element == Elements.Dark)
+        {
+            switch (thisElement)
+            {
+                case Elements.Neutral: return dmg;
+                case Elements.Fire: return dmg;
+                case Elements.Earth: return dmg;
+                case Elements.Water: return dmg;
+                case Elements.Light: return (dmg * Mathf.RoundToInt(gm.strongerDamagePercent / 100));
+                case Elements.Dark: return dmg;
+            }
+        }
+        else
+        {
+            return dmg;
+        }
+
+        return dmg;
+    }
+
     public void AddHealth(int value)
     {
         curHealth += value;
+
+        if (value > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.healthAddColor, value);
+        }
     }
 
     public void AddShield(int value)
     {
         curShield += value;
+
+        if (value > 0)
+        {
+            var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+            dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.shieldAddColor, value);
+        }
     }
 
+    public void AddAilment(Ailments newBuff)
+    {
+        var a = new ActiveAilments();
+        a.ailmentType = newBuff;
+        a.ailmentCurrentRounds = newBuff.ailmentMaxTurns;
+        activeAilments.Add(a);
+    }
+
+    public void ApplyAilment()
+    {
+        foreach (ActiveAilments ailment in activeAilments.ToList())
+        {
+            AilmentShow();
+            if (ailment.ailmentCurrentRounds <= 0)
+            {
+                activeAilments.Remove(ailment);
+                return;
+            }
+
+            ApplyTrueDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentTrueDamage);
+            ApplyNormalDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentNormalDamage);
+
+            AddHealth(ailment.ailmentType.ailmentHealthAdd);
+            AddShield(ailment.ailmentType.ailmentShieldAdd);
+
+            ailment.ailmentCurrentRounds--;
+        }
+    }
+
+    public void AilmentShow()
+    {
+        foreach (ActiveAilments ailment in activeAilments)
+        {
+            if(ailment.ailmentCurrentRounds > 0)
+            {
+                effect_Bleed.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Bleeding);
+                effect_Blind.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Blind);
+                effect_Break.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Break);
+                effect_Burn.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Burn);
+                effect_Chill.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Chill);
+                effect_Cursed.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Cursed);
+                effect_Exhausted.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Exhausted);
+                effect_Leech.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Leech);
+                effect_Poison.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Poison);
+                effect_Provoke.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Provoke);
+                effect_Sleep.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Sleep);
+                effect_Stun.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Stun);
+                effect_Absorb.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Absorb);
+                effect_Berserk.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Berserk);
+                effect_Fortune.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Fortune);
+                effect_Regeneration.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Regeneration);
+                effect_Toughness.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Toughness);
+                effect_Cleansing.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.CleansingBuff);
+                effect_DestroyMana.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.DestroyMana);
+                effect_Draw.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.DrawCard);
+                effect_Heal.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Heal);
+                effect_ManaBonus.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.ManaBonus);
+                effect_StealMana.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.StealMana);
+                effect_Reposition.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Reposition);
+
+            }
+            else
+            {
+                effect_Bleed.gameObject.SetActive(false);
+                effect_Blind.gameObject.SetActive(false);
+                effect_Break.gameObject.SetActive(false);
+                effect_Burn.gameObject.SetActive(false);
+                effect_Chill.gameObject.SetActive(false);
+                effect_Cursed.gameObject.SetActive(false);
+                effect_Exhausted.gameObject.SetActive(false);
+                effect_Leech.gameObject.SetActive(false);
+                effect_Poison.gameObject.SetActive(false);
+                effect_Provoke.gameObject.SetActive(false);
+                effect_Sleep.gameObject.SetActive(false);
+                effect_Stun.gameObject.SetActive(false);
+                effect_Absorb.gameObject.SetActive(false);
+                effect_Berserk.gameObject.SetActive(false);
+                effect_Fortune.gameObject.SetActive(false);
+                effect_Regeneration.gameObject.SetActive(false);
+                effect_Toughness.gameObject.SetActive(false);
+                effect_Cleansing.gameObject.SetActive(false);
+                effect_DestroyMana.gameObject.SetActive(false);
+                effect_Draw.gameObject.SetActive(false);
+                effect_Heal.gameObject.SetActive(false);
+                effect_ManaBonus.gameObject.SetActive(false);
+                effect_StealMana.gameObject.SetActive(false);
+                effect_Reposition.gameObject.SetActive(false);
+            }
+        }
+    }
+
+}
+
+[Serializable]
+public class ActiveAilments
+{
+    public Ailments ailmentType;
+
+    public int ailmentCurrentRounds;
 }
