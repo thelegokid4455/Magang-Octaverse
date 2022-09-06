@@ -66,15 +66,18 @@ public class RecruitManager : MonoBehaviour
             return;
         }
 
-        invm.AddToInventory(
-            ChooseParentPart(Random.Range(0, 2), BodyParts.Body),
-            ChooseParentPart(Random.Range(0, 2), BodyParts.Face),
-            ChooseParentPart(Random.Range(0, 2), BodyParts.Weapon),
-            ChooseParentPart(Random.Range(0, 2), BodyParts.Top),
-            ChooseParentPart(Random.Range(0, 2), BodyParts.Back)
-            );
+        var newCharacter = new Character();
+        newCharacter.characterBody = ChooseParentPart(Random.Range(0, 2), BodyParts.Body);
+        newCharacter.characterFace = ChooseParentPart(Random.Range(0, 2), BodyParts.Face);
+        newCharacter.characterWeapon = ChooseParentPart(Random.Range(0, 2), BodyParts.Weapon);
+        newCharacter.characterTop = ChooseParentPart(Random.Range(0, 2), BodyParts.Top);
+        newCharacter.characterBack = ChooseParentPart(Random.Range(0, 2), BodyParts.Back);
+
+        invm.AddToInventory(newCharacter);
 
         GameManager.instance.AddGold(-buyingPrice);
+
+        SaveManager.instance.SaveGameFile();
     }
 
     BodyPart ChooseParentPart(int whichParent, BodyParts part)
@@ -220,17 +223,19 @@ public class RecruitManager : MonoBehaviour
             return;
         }
 
-        invm.AddToInventory(
-                invm.allCharacterBody[RandomCharacter(invm.allCharacterBody)],
-                invm.allCharacterFace[RandomCharacter(invm.allCharacterFace)],
-                invm.allCharacterWeapon[RandomCharacter(invm.allCharacterWeapon)],
-                invm.allCharacterTop[RandomCharacter(invm.allCharacterTop)],
-                invm.allCharacterBack[RandomCharacter(invm.allCharacterBack)]
-                );
+
+        var newCharacter = new Character();
+        newCharacter.characterBody = invm.allCharacterBody[RandomCharacter(invm.allCharacterBody)];
+        newCharacter.characterFace = invm.allCharacterFace[RandomCharacter(invm.allCharacterFace)];
+        newCharacter.characterWeapon = invm.allCharacterWeapon[RandomCharacter(invm.allCharacterWeapon)];
+        newCharacter.characterTop = invm.allCharacterTop[RandomCharacter(invm.allCharacterTop)];
+        newCharacter.characterBack = invm.allCharacterBack[RandomCharacter(invm.allCharacterBack)];
+
+        invm.AddToInventory(newCharacter);
 
         GameManager.instance.AddGold(-buyingPrice);
-        
 
+        SaveManager.instance.SaveGameFile();
     }
 
     int RandomCharacter(List<BodyPart> partList)

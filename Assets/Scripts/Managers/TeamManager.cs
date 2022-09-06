@@ -46,6 +46,8 @@ public class TeamManager : MonoBehaviour
             Destroy(child.gameObject);
         }
         selectionMenu.SetActive(false);
+
+        SaveManager.instance.SaveGameFile();
     }
 
     public void SelectRow(int row)

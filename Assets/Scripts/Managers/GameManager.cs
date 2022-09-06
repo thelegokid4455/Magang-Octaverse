@@ -47,22 +47,17 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private void Awake()
     {
-        instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
+        instance = this; 
         
-        if(selectedCharacters.Count <= 0)
+        if (selectedCharacters.Count <= 0)
         {
-            if(InventoryManager.instance.playerInventory.characterInInventory.Count >= 4)
+            if (InventoryManager.instance.playerInventory.characterInInventory.Count >= 4)
             {
-                
+
 
                 var count = 0;
 
-                while(count < 4)
+                while (count < 4)
                 {
                     var newChar = new Character();
                     selectedCharacters.Add(newChar);
@@ -88,6 +83,13 @@ public class GameManager : MonoBehaviour
 
             MenuSceneManager.instance.SetCharData();
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+        
     }
 
     // Update is called once per frame

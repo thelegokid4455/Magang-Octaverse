@@ -997,6 +997,8 @@ public class BattleManager : MonoBehaviour
 
         //reset mission
         currentMission = null;
+
+        SaveManager.instance.SaveGameFile();
     }
 
     //CHECKS

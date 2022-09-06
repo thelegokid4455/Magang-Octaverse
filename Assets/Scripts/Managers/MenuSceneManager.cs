@@ -215,4 +215,10 @@ public class MenuSceneManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ResetData()
+    {
+        SaveManager.instance.ResetSaveFile(true);
+        
+    }
 }
