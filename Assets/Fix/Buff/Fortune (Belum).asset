@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07474477699b9f948905fd6a6613704b, type: 3}
-  m_Name: Exhausted
+  m_Name: Fortune (Belum)
   m_EditorClassIdentifier: 
-  ailmentNames: 10
+  ailmentNames: 14
   ailmentElement: 0
   ailmentMaxTurns: 3
   ailmentTrueDamage: 0
