@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ailmentNames: 8
   ailmentElement: 0
-  ailmentMaxTurns: 2
+  ailmentMaxTurns: 3
   ailmentTrueDamage: 35
   ailmentNormalDamage: 0
   ailmentHealthAdd: 0

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07474477699b9f948905fd6a6613704b, type: 3}
-  m_Name: Exhausted
+  m_Name: Break (Belum)
   m_EditorClassIdentifier: 
-  ailmentNames: 10
+  ailmentNames: 24
   ailmentElement: 0
-  ailmentMaxTurns: 3
+  ailmentMaxTurns: 1
   ailmentTrueDamage: 0
   ailmentNormalDamage: 0
   ailmentHealthAdd: 0
@@ -22,4 +22,4 @@ MonoBehaviour:
   ailmentManaAdd: 0
   cleanseAll: 0
   drawCard: 0
-  shieldBreak: 0
+  shieldBreak: 1
