@@ -84,15 +84,28 @@ public class GameplayCardAttack : MonoBehaviour
 
 
 
-    void SetImage()
+    public void SetImage()
     {
         if (thisCard)
         {
             nameText.text = thisCard.cardName;
             imageSprite.sprite = thisCard.cardIllust;
-            manaText.text = thisCard.cardMana.ToString();
-            
-            if(thisCard.cardTrueDamage > 0)
+
+            bool exhausted = false;
+
+            foreach (ActiveAilments ail in cardCharacter.activeAilments)
+            {
+                if (ail.ailmentType.ailmentNames == AilmentType.Exhausted)
+                {
+                    exhausted = true;
+                }
+            }
+
+            manaText.text = (exhausted ? (thisCard.cardMana * 2) : (thisCard.cardMana)).ToString();
+            manaText.color = exhausted ? Color.red : Color.white;
+
+
+            if (thisCard.cardTrueDamage > 0)
             {
                 damageText.text = thisCard.cardTrueDamage.ToString();
             }
@@ -185,7 +198,7 @@ public class GameplayCardAttack : MonoBehaviour
         }
         else
         {
-            if (BattleManager.instance.CheckPlayerHasEnoughMana(thisCard.cardMana))
+            if (BattleManager.instance.CheckPlayerHasEnoughMana(thisCard.cardMana, cardCharacter))
             {
                 BattleManager.instance.SelectCard(this);
                 isSelected = true;
@@ -198,6 +211,7 @@ public class GameplayCardAttack : MonoBehaviour
             else
             {
                 print("Not enough mana!");
+                MenuSceneManager.instance.SetNotification("Not enough mana!");
             }
         }
         

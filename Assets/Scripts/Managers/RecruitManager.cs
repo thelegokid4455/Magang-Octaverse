@@ -11,6 +11,11 @@ public class RecruitManager : MonoBehaviour
     [SerializeField] Character selectedChar1;
     [SerializeField] Character selectedChar2;
 
+    //texts
+    [SerializeField] string notifNoSpace;
+    [SerializeField] string notifNoMoney;
+    [SerializeField] string notifNewChar;
+
     //parent slect
     [SerializeField] int selectedRow;
     [SerializeField] GameObject selectionMenu;
@@ -55,6 +60,8 @@ public class RecruitManager : MonoBehaviour
         if (!GameManager.instance.HasEnoughMoney(buyingPrice))
         {
             print("not enough money!");
+
+            MenuSceneManager.instance.SetNotification(notifNoMoney);
             return;
         }
 
@@ -63,6 +70,8 @@ public class RecruitManager : MonoBehaviour
         if (invm.playerInventory.characterInInventory.Count >= invm.playerInventory.maxCharactersInInventory)
         {
             print("not enough space!");
+
+            MenuSceneManager.instance.SetNotification(notifNoSpace);
             return;
         }
 
@@ -76,6 +85,8 @@ public class RecruitManager : MonoBehaviour
         invm.AddToInventory(newCharacter);
 
         GameManager.instance.AddGold(-buyingPrice);
+
+        MenuSceneManager.instance.SetNotification(notifNewChar);
 
         SaveManager.instance.SaveGameFile();
     }
@@ -211,7 +222,10 @@ public class RecruitManager : MonoBehaviour
     {
         if (!GameManager.instance.HasEnoughMoney(buyingPrice))
         {
-            print("not enough money!"); 
+            print("not enough money!");
+
+            MenuSceneManager.instance.SetNotification(notifNoMoney);
+
             return;
         }
 
@@ -220,6 +234,7 @@ public class RecruitManager : MonoBehaviour
         if (invm.playerInventory.characterInInventory.Count >= invm.playerInventory.maxCharactersInInventory)
         {
             print("not enough space!");
+            MenuSceneManager.instance.SetNotification(notifNoSpace);
             return;
         }
 
@@ -234,6 +249,8 @@ public class RecruitManager : MonoBehaviour
         invm.AddToInventory(newCharacter);
 
         GameManager.instance.AddGold(-buyingPrice);
+
+        MenuSceneManager.instance.SetNotification(notifNewChar);
 
         SaveManager.instance.SaveGameFile();
     }

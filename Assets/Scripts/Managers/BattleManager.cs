@@ -420,6 +420,14 @@ public class BattleManager : MonoBehaviour
             count++;
         }
 
+        foreach(GameplayCharacter character in currentCharacters)
+        {
+            foreach (GameplayCardAttack cards in character.myCards)
+            {
+                cards.SetImage();
+            }
+        }
+
         
         
 
@@ -501,7 +509,16 @@ public class BattleManager : MonoBehaviour
         //card.transform.DOLocalMove(Vector3.zero, 1);
         //card.transform.DOScale(Vector3.one, 1);
 
-        playerCurMana -= card.thisCard.cardMana;
+        bool exhausted = false;
+        foreach (ActiveAilments ail in card.cardCharacter.activeAilments)
+        {
+            if (ail.ailmentType.ailmentNames == AilmentType.Exhausted)
+            {
+                exhausted = true;
+            }
+        }
+
+        playerCurMana -= card.thisCard.cardMana * (exhausted? 2 : 1);
     }
 
     public void DeSelectCard(GameplayCardAttack card)
@@ -514,7 +531,16 @@ public class BattleManager : MonoBehaviour
         //card.transform.DOLocalMove(Vector3.zero, 1);
         //card.transform.DOScale(Vector3.one, 1);
 
-        playerCurMana += card.thisCard.cardMana;
+        bool exhausted = false;
+        foreach (ActiveAilments ail in card.cardCharacter.activeAilments)
+        {
+            if (ail.ailmentType.ailmentNames == AilmentType.Exhausted)
+            {
+                exhausted = true;
+            }
+        }
+
+        playerCurMana += card.thisCard.cardMana * (exhausted ? 2 : 1);
 
         selectedCards.Remove(card);
     }
@@ -570,12 +596,6 @@ public class BattleManager : MonoBehaviour
         selectedCards = selectedCards.OrderByDescending(ch => ch.cardCharSpeed).ToList();
 
         CardTurnUseStats();
-
-        ///////////////////////////////////////////////
-
-
-
-        /////////////////////////////////////////////////////////
 
         curBattleTurnCard++;
         curBattleAnimationTurnTime = battleAnimationTurnTime;
@@ -702,11 +722,77 @@ public class BattleManager : MonoBehaviour
                     currentEnemies[3].AddHealth(selectedCards[curBattleTurnCard].thisCard.cardHealthAdd);
                 else return;
             }
-            
+
+            //ailments
+            foreach (GameplayCharacter targets in selectedCards[curBattleTurnCard].selectedTarget.ToList())
+            {
+                //add ailments
+                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment != null)
+                {
+                    if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement == AilmentType.None)
+                    {
+                        //check same ailments
+                        if (HasSameAilment(currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                        {
+                            foreach (ActiveAilments ail in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                            {
+                                if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
+                                {
+                                    //has ailments same
+                                    ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
+                            currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                        }
+
+
+                    }
+                    else
+                    {
+                        foreach (ActiveAilments buff in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                        {
+                            if (buff.ailmentType.ailmentNames == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement)
+                            {
+
+                                //check same ailments
+                                if (HasSameAilment(currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                                {
+                                    foreach (ActiveAilments ail in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                                    {
+                                        if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
+                                        {
+                                            //has ailments same
+                                            ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
+                                    currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+
+                    //no ailments
+                }
+            }
+
 
             enemyCardUsed++;
 
         }
+        ///////////////
         else
         {
             if (currentCharacters[selectedCards[curBattleTurnCard].cardCharRow - 1].curHealth <= 0)
@@ -745,33 +831,70 @@ public class BattleManager : MonoBehaviour
                     currentCharacters[3].AddHealth(selectedCards[curBattleTurnCard].thisCard.cardHealthAdd);
                 else return;
             }
+
+            //ailments
             foreach (GameplayCharacter targets in selectedCards[curBattleTurnCard].selectedTarget.ToList())
             {
-                //ailments
+                //add ailment
                 if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment != null)
                 {
-                    print("there is ailment to add");
                     if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement == AilmentType.None)
                     {
-                        print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
-                        currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                        //check same ailments
+                        if (HasSameAilment(currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                        {
+                            foreach (ActiveAilments ail in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                            {
+                                if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
+                                {
+                                    //has ailments same
+                                    ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
+                            currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                        }
+
+
                     }
                     else
                     {
-                        foreach (ActiveAilments buff in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments)
+                        //character buff
+                        foreach (ActiveAilments buff in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
                         {
                             if (buff.ailmentType.ailmentNames == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement)
                             {
-                                print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name + " because of " + buff.ailmentType.ailmentNames);
-                                currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+
+                                //check same ailments
+                                if (HasSameAilment(currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                                {
+                                    foreach (ActiveAilments ail in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                                    {
+                                        if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
+                                        {
+                                            //has ailments same
+                                            ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
+                                    currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                                }
+
                             }
                         }
+
                     }
                 }
                 else
                 {
 
-                    print("there is no ailment to add");
+                    //no ailments
                 }
             }
             
@@ -796,6 +919,20 @@ public class BattleManager : MonoBehaviour
 
         Destroy(selectedCards[curBattleTurnCard].gameObject);
     }
+
+    bool HasSameAilment(List<ActiveAilments> checkList, Ailments checkType)
+    {
+        //check same ailments
+        foreach (ActiveAilments ail in checkList)
+        {
+            if (ail.ailmentType.ailmentNames == checkType.ailmentNames)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     void CardTurnFinish()
     {
         if (hasFinished) return;
@@ -815,7 +952,16 @@ public class BattleManager : MonoBehaviour
         {
             var index = UnityEngine.Random.Range(0, enemy.availableCards.Count);
 
-            if (enemyCurMana >= enemy.availableCards[index].cardMana)
+            bool exhausted = false;
+            foreach(ActiveAilments ail in enemy.activeAilments)
+            {
+                if(ail.ailmentType.ailmentNames == AilmentType.Exhausted)
+                {
+                    exhausted = true;
+                }
+            }
+
+            if (enemyCurMana >= (enemy.availableCards[index].cardMana * (exhausted? 2 : 1)))
             {
                 //SpawnNewCard(enemy, enemyPositions[currentEnemies.IndexOf(enemy)].selectedCardPos);
                 SpawnNewCard(enemy, CheckEmptySlotSelect(false, currentEnemies[currentEnemies.IndexOf(enemy)].characterRow - 1));
@@ -850,7 +996,9 @@ public class BattleManager : MonoBehaviour
     {
         if (hasFinished) return;
 
+
         currentRound++;
+
 
         foreach (GameplayCharacter character in currentCharacters)
         {
@@ -1002,9 +1150,18 @@ public class BattleManager : MonoBehaviour
     }
 
     //CHECKS
-    public bool CheckPlayerHasEnoughMana(int number)
+    public bool CheckPlayerHasEnoughMana(int number, GameplayCharacter character)
     {
-        if (number <= playerCurMana)
+        bool exhausted = false;
+        foreach (ActiveAilments ail in character.activeAilments)
+        {
+            if (ail.ailmentType.ailmentNames == AilmentType.Exhausted)
+            {
+                exhausted = true;
+            }
+        }
+
+        if ((number * (exhausted ? 2 : 1)) <= playerCurMana)
         {
             return true;
         }

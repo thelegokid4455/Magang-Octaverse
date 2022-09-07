@@ -382,7 +382,7 @@ public class GameplayCharacter : MonoBehaviour
     {
         var a = new ActiveAilments();
         a.ailmentType = newBuff;
-        a.ailmentCurrentRounds = newBuff.ailmentMaxTurns;
+        a.ailmentCurrentTurns = newBuff.ailmentMaxTurns + 1;
         activeAilments.Add(a);
     }
 
@@ -391,7 +391,7 @@ public class GameplayCharacter : MonoBehaviour
         foreach (ActiveAilments ailment in activeAilments.ToList())
         {
             AilmentShow();
-            if (ailment.ailmentCurrentRounds <= 0)
+            if (ailment.ailmentCurrentTurns <= 0)
             {
                 activeAilments.Remove(ailment);
                 return;
@@ -403,15 +403,20 @@ public class GameplayCharacter : MonoBehaviour
             AddHealth(ailment.ailmentType.ailmentHealthAdd);
             AddShield(ailment.ailmentType.ailmentShieldAdd);
 
-            ailment.ailmentCurrentRounds--;
+            ailment.ailmentCurrentTurns--;
+
+            print("ailment " + ailment.ailmentType.name + " reduce 1");
         }
+
+
+        print("ailment should reduce 1");
     }
 
     public void AilmentShow()
     {
         foreach (ActiveAilments ailment in activeAilments)
         {
-            if(ailment.ailmentCurrentRounds > 0)
+            if(ailment.ailmentCurrentTurns > 0)
             {
                 effect_Bleed.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Bleeding);
                 effect_Blind.gameObject.SetActive(ailment.ailmentType.ailmentNames == AilmentType.Blind);
@@ -476,5 +481,5 @@ public class ActiveAilments
 {
     public Ailments ailmentType;
 
-    public int ailmentCurrentRounds;
+    public int ailmentCurrentTurns;
 }

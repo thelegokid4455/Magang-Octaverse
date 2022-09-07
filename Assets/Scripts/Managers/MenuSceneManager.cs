@@ -47,6 +47,10 @@ public class MenuSceneManager : MonoBehaviour
     //transition
     public GameObject transitionObject;
 
+    //NOTIF
+    [SerializeField] GameObject notifGameobject;
+    [SerializeField] Text notifText;
+
     public static MenuSceneManager instance;
 
     private void Awake()
@@ -181,6 +185,13 @@ public class MenuSceneManager : MonoBehaviour
 
         transitionObject.SetActive(false);
         transitionObject.GetComponent<Animation>().Stop();
+    }
+
+    //UI
+    public void SetNotification(string newText)
+    {
+        notifGameobject.SetActive(true);
+        notifText.text = newText;
     }
 
     //battle
