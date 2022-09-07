@@ -45,7 +45,7 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] int manaAddPerRound;
 
-    [SerializeField] int cardsMaxHeldPerCharacterSingleRotation;
+    public int cardsMaxHeldPerCharacterSingleRotation;
 
     public bool hasStarted;
     public bool hasFinished;
@@ -327,6 +327,9 @@ public class BattleManager : MonoBehaviour
                     
                 }
 
+                curPlayerDiscard -= character.cardUsed;
+                curPlayerCard -= character.cardLeft;
+
                 Destroy(character.gameObject);
                 currentCharacters.Remove(character);
             }
@@ -336,6 +339,10 @@ public class BattleManager : MonoBehaviour
         {
             if (character.curHealth <= 0)
             {
+
+                curEnemyDiscard -= character.cardUsed;
+                curEnemyCard -= character.cardLeft;
+
                 Destroy(character.gameObject);
                 currentEnemies.Remove(character);
             }
@@ -389,7 +396,8 @@ public class BattleManager : MonoBehaviour
         while(count < cardsToDraw)
         {
             var indexChar = UnityEngine.Random.Range(0, currentCharacters.Count);
-            var indexEnemy = UnityEngine.Random.Range(0, currentCharacters.Count);
+            var lastIndex = 0;
+            //var indexEnemy = UnityEngine.Random.Range(0, currentCharacters.Count);
 
             if (curPlayerCard > 0)
             {
@@ -397,15 +405,33 @@ public class BattleManager : MonoBehaviour
                 {
                     if (currentCharacters.IndexOf(character) == indexChar)
                     {
+                        lastIndex = indexChar;
                         if (character.cardHeldThisDeckRotation < cardsMaxHeldPerCharacterSingleRotation)
                         {
                             SpawnNewCard(character, CheckEmptySlotReturn(character.characterRow - 1));
                             character.cardHeldThisDeckRotation++;
 
+                            character.cardLeft--;
+                            character.cardInHand++;
+
                             curPlayerCard --;
                         }
                         else
                         {
+                            while (indexChar != lastIndex)
+                            {
+                                indexChar = UnityEngine.Random.Range(0, currentCharacters.Count);
+
+                                SpawnNewCard(character, CheckEmptySlotReturn(character.characterRow - 1));
+                                character.cardHeldThisDeckRotation++;
+
+                                character.cardLeft--;
+                                character.cardInHand++;
+
+                                curPlayerCard--;
+
+                                lastIndex = indexChar;
+                            }
                             //return;
                         }
                     }
@@ -484,7 +510,17 @@ public class BattleManager : MonoBehaviour
     void ReShuffleDeckPlayer()
     {
         curPlayerDiscard = 0;
-        curPlayerCard = playerMaxCard;
+
+        var totalCards = 0;
+        foreach(GameplayCharacter character in currentCharacters)
+        {
+            foreach(GameplayCardAttack card in character.myCards)
+            {
+                totalCards += 1;
+            }
+        }
+
+        curPlayerCard = (cardsMaxHeldPerCharacterSingleRotation * currentCharacters.Count) - totalCards;
 
         foreach (GameplayCharacter character in currentCharacters)
         {
@@ -788,7 +824,8 @@ public class BattleManager : MonoBehaviour
                 }
             }
 
-
+            selectedCards[curBattleTurnCard].cardCharacter.cardUsed++;
+            selectedCards[curBattleTurnCard].cardCharacter.cardInHand--;
             enemyCardUsed++;
 
         }
@@ -897,8 +934,9 @@ public class BattleManager : MonoBehaviour
                     //no ailments
                 }
             }
-            
 
+            selectedCards[curBattleTurnCard].cardCharacter.cardUsed++;
+            selectedCards[curBattleTurnCard].cardCharacter.cardInHand--;
             playerCardUsed++;
 
 
@@ -965,7 +1003,12 @@ public class BattleManager : MonoBehaviour
             {
                 //SpawnNewCard(enemy, enemyPositions[currentEnemies.IndexOf(enemy)].selectedCardPos);
                 SpawnNewCard(enemy, CheckEmptySlotSelect(false, currentEnemies[currentEnemies.IndexOf(enemy)].characterRow - 1));
-                
+
+                enemy.cardUsed++;
+
+                enemy.cardInHand--;
+                enemy.cardLeft--;
+
                 curEnemyCard--;
                 
             }

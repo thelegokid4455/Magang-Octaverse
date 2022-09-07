@@ -43,4 +43,6 @@ public class CardAilmentRequirement
 {
     public AilmentType activeRequirement;
     public Ailments activatedAilment;
+
+    public bool needShield;
 }

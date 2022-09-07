@@ -19431,7 +19431,7 @@ MonoBehaviour:
   selectedCards: []
   battleAnimationTurnTime: 2
   manaAddPerRound: 5
-  cardsMaxHeldPerCharacterSingleRotation: 16
+  cardsMaxHeldPerCharacterSingleRotation: 8
   hasStarted: 0
   hasFinished: 0
   currentCharacters: []

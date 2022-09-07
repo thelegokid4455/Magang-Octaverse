@@ -29,6 +29,11 @@ public class GameplayCharacter : MonoBehaviour
     public List<GameplayCardAttack> myCards = new List<GameplayCardAttack>();
     public List<Card> availableCards = new List<Card>();
 
+    //cards
+    public int cardUsed;
+    public int cardInHand;
+    public int cardLeft;
+
     //buffs
     public List<ActiveAilments> activeAilments = new List<ActiveAilments>();
 
@@ -194,6 +199,7 @@ public class GameplayCharacter : MonoBehaviour
             card.thisElement = thisElement;
         }
 
+        cardLeft = BattleManager.instance.cardsMaxHeldPerCharacterSingleRotation;
 
         curHealth = maxHealth;
         healthBar.maxValue = maxHealth;
@@ -356,7 +362,7 @@ public class GameplayCharacter : MonoBehaviour
         return dmg;
     }
 
-    public void AddHealth(int value)
+    public void AddHealth(float value)
     {
         curHealth += value;
 
@@ -400,8 +406,8 @@ public class GameplayCharacter : MonoBehaviour
             ApplyTrueDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentTrueDamage);
             ApplyNormalDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentNormalDamage);
 
-            AddHealth(ailment.ailmentType.ailmentHealthAdd);
-            AddShield(ailment.ailmentType.ailmentShieldAdd);
+            AddHealth((ailment.ailmentType.ailmentHealthPercentAdd / 100) * maxHealth);
+            AddShield((120 / 100) * ailment.ailmentType.ailmentShieldPercentAdd);
 
             ailment.ailmentCurrentTurns--;
 

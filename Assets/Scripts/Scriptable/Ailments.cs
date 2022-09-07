@@ -13,8 +13,9 @@ public class Ailments : ScriptableObject
     public int ailmentNormalDamage;
 
     //status add
-    public int ailmentHealthAdd;
-    public int ailmentShieldAdd;
+    public int ailmentHealthPercentAdd;
+
+    public int ailmentShieldPercentAdd;
 
 
     public int ailmentManaAdd;
