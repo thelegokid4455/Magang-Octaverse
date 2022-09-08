@@ -20,11 +20,12 @@ public class Ailments : ScriptableObject
     public int ailmentShieldPercentAdd;
 
 
-    public int ailmentManaAdd;
-    public int ailmentManaSteal;
-    public int ailmentManaDestroy;
+
 
     //public int ailmentSpeedAdd;
+    public bool ailmentManaAdd;
+    public bool ailmentManaSteal;
+    public bool ailmentManaDestroy;
 
     public bool cleanseAll;
     public bool drawCard;

@@ -426,32 +426,32 @@ public class GameplayCharacter : MonoBehaviour
 
         if(isEnemy)
         {
-            BattleManager.instance.enemyCurMana += toAdd.ailmentManaAdd;
+            BattleManager.instance.enemyCurMana += 2;
 
             if(BattleManager.instance.currentEnemies.Contains(this))
             {
-                BattleManager.instance.enemyCurMana += toAdd.ailmentManaSteal;
+                BattleManager.instance.enemyCurMana += 1;
             }
             else
             {
-                BattleManager.instance.enemyCurMana -= toAdd.ailmentManaSteal;
+                BattleManager.instance.enemyCurMana -= 1;
 
-                BattleManager.instance.enemyCurMana -= toAdd.ailmentManaDestroy;
+                BattleManager.instance.enemyCurMana -= 1;
             }
         }
         else
         {
-            BattleManager.instance.playerCurMana += toAdd.ailmentManaAdd;
+            BattleManager.instance.playerCurMana += 2;
 
             if (BattleManager.instance.currentCharacters.Contains(this))
             {
-                BattleManager.instance.playerCurMana += toAdd.ailmentManaSteal;
+                BattleManager.instance.playerCurMana += 1;
             }
             else
             {
-                BattleManager.instance.playerCurMana -= toAdd.ailmentManaSteal;
+                BattleManager.instance.playerCurMana -= 1;
 
-                BattleManager.instance.playerCurMana -= toAdd.ailmentManaDestroy;
+                BattleManager.instance.playerCurMana -= 1;
             }
 
             if (toAdd.drawCard) BattleManager.instance.DrawCard(1);
