@@ -19425,6 +19425,7 @@ MonoBehaviour:
   playerMaxMana: 30
   playerMaxCard: 32
   maxPlayerDiscard: 32
+  startingMana: 10
   enemyMaxMana: 30
   enemyMaxCard: 32
   maxEnemyDiscard: 32

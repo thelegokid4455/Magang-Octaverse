@@ -12,6 +12,8 @@ public class Ailments : ScriptableObject
     public int ailmentTrueDamage;
     public int ailmentNormalDamage;
 
+    public bool isPositif;
+
     //status add
     public int ailmentHealthPercentAdd;
 
@@ -19,6 +21,7 @@ public class Ailments : ScriptableObject
 
 
     public int ailmentManaAdd;
+    public int ailmentManaSteal;
 
     //public int ailmentSpeedAdd;
 

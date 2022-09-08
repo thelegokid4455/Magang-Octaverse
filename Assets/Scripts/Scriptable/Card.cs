@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Gameplay/Card")]
 public class Card : ScriptableObject
@@ -41,8 +42,8 @@ public class Card : ScriptableObject
 [Serializable]
 public class CardAilmentRequirement
 {
-    public AilmentType activeRequirement;
-    public Ailments activatedAilment;
+    public List<AilmentType> activeRequirement = new List<AilmentType>();
+    public List<Ailments> activatedAilment = new List<Ailments>();
 
     public bool needShield;
 }

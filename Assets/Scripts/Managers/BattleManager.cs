@@ -21,14 +21,16 @@ public class BattleManager : MonoBehaviour
 
     //stats
     [SerializeField] int playerMaxMana;
-    int playerCurMana;
+    public int playerCurMana;
     [SerializeField] int playerMaxCard;
     int curPlayerCard;
     [SerializeField] int maxPlayerDiscard;
     int curPlayerDiscard;
 
+    public int startingMana;
+
     [SerializeField] int enemyMaxMana;
-    int enemyCurMana;
+    public int enemyCurMana;
     [SerializeField] int enemyMaxCard;
     int curEnemyCard;
     [SerializeField] int maxEnemyDiscard;
@@ -238,10 +240,10 @@ public class BattleManager : MonoBehaviour
 
     void SetBattle()
     {
-        playerCurMana = playerMaxMana;
+        playerCurMana = startingMana;
         curPlayerCard = playerMaxCard;
 
-        enemyCurMana = enemyMaxMana;
+        enemyCurMana = startingMana;
         curEnemyCard = enemyMaxCard;
 
         currentRound = 1;
@@ -387,7 +389,7 @@ public class BattleManager : MonoBehaviour
     }
 
 
-    void DrawCard(int cardsToDraw)
+    public void DrawCard(int cardsToDraw)
     {
         print("starting draw phase, round " + currentRound);
 
@@ -599,7 +601,7 @@ public class BattleManager : MonoBehaviour
         if (currentPhase != 1) return;
 
         PhaseAttackEnemy();
-        print("starting battle phase, round " + currentRound);
+        //print("starting battle phase, round " + currentRound);
     }
 
     void PhaseAttackEnemy()
@@ -718,7 +720,10 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
-        
+
+        var curCardAil = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment;
+        var curCardReq = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement;
+
 
         if (selectedCards[curBattleTurnCard].thisCard.isEnemy)
         {
@@ -762,67 +767,126 @@ public class BattleManager : MonoBehaviour
             //ailments
             foreach (GameplayCharacter targets in selectedCards[curBattleTurnCard].selectedTarget.ToList())
             {
-                //add ailments
-                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment != null)
+                foreach (AilmentType charAilment in curCardReq)
                 {
-                    if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement == AilmentType.None)
+                    //add ailment
+                    if (curCardAil != null)
                     {
-                        //check same ailments
-                        if (HasSameAilment(currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                        //no requirements
+                        if (charAilment == AilmentType.None)
                         {
-                            foreach (ActiveAilments ail in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                            print("no ailment requirement");
+
+                            //instant
+                            foreach (Ailments ail in curCardAil)
                             {
-                                if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
+                                currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, true);
+                            }
+
+                            //check same ailments
+                            if (HasSameAilment(currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, curCardAil[curCardReq.IndexOf(charAilment)]))
+                            {
+                                foreach (ActiveAilments ail in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
                                 {
-                                    //has ailments same
-                                    ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
+                                    if (ail.ailmentType == curCardAil[curCardReq.IndexOf(charAilment)])
+                                    {
+                                        if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
+                                        {
+                                            if (targets.curShield > 0)
+                                            {
+                                                //has ailments same
+                                                ail.ailmentCurrentTurns = curCardAil[curCardReq.IndexOf(charAilment)].ailmentMaxTurns;
+                                            }
+                                        }
+
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
-                            currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
-                        }
-
-
-                    }
-                    else
-                    {
-                        foreach (ActiveAilments buff in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
-                        {
-                            if (buff.ailmentType.ailmentNames == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement)
+                            else
                             {
-
-                                //check same ailments
-                                if (HasSameAilment(currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
                                 {
-                                    foreach (ActiveAilments ail in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                                    if (targets.curShield > 0)
                                     {
-                                        if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
-                                        {
-                                            //has ailments same
-                                            ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
-                                        }
+                                        currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
                                     }
                                 }
                                 else
                                 {
-                                    print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
-                                    currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                                    currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
                                 }
-
                             }
-                        }
 
+
+                        }
+                        //has requirements
+                        else
+                        {
+                            print("ailments has requirement");
+                            //character buff
+                            foreach (ActiveAilments buff in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                            {
+                                if (buff.ailmentType.ailmentNames == curCardReq[curCardReq.IndexOf(charAilment)])
+                                {
+
+                                    //instant
+                                    foreach (Ailments ail in curCardAil)
+                                    {
+                                        currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, true);
+                                    }
+
+                                    //check same ailments
+                                    if (HasSameAilment(currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, curCardAil[curCardReq.IndexOf(charAilment)]))
+                                    {
+                                        foreach (ActiveAilments ail in currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                                        {
+                                            if (ail.ailmentType == curCardAil[curCardReq.IndexOf(charAilment)])
+                                            {
+
+                                                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
+                                                {
+                                                    if (targets.curShield > 0)
+                                                    {
+                                                        //has ailments same
+                                                        ail.ailmentCurrentTurns = curCardAil[curCardReq.IndexOf(charAilment)].ailmentMaxTurns;
+
+                                                        print("ailments add turn");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
+                                        {
+                                            if (targets.curShield > 0)
+                                            {
+                                                currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
+                                        }
+                                    }
+
+                                }
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        print("not ailments");
+                        //no ailments
                     }
                 }
-                else
-                {
 
-                    //no ailments
-                }
+
             }
+
 
             selectedCards[curBattleTurnCard].cardCharacter.cardUsed++;
             selectedCards[curBattleTurnCard].cardCharacter.cardInHand--;
@@ -872,66 +936,121 @@ public class BattleManager : MonoBehaviour
             //ailments
             foreach (GameplayCharacter targets in selectedCards[curBattleTurnCard].selectedTarget.ToList())
             {
-                //add ailment
-                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment != null)
+                foreach(AilmentType charAilment in curCardReq)
                 {
-                    if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement == AilmentType.None)
+                    //add ailment
+                    if (curCardAil != null)
                     {
-                        //check same ailments
-                        if (HasSameAilment(currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                        //no requirements
+                        if (charAilment == AilmentType.None)
                         {
-                            foreach (ActiveAilments ail in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                            print("no ailment requirement");
+
+                            //instant
+                            foreach (Ailments ail in curCardAil)
                             {
-                                if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
+                                currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, false);
+                            }
+
+                            //check same ailments
+                            if (HasSameAilment(currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, curCardAil[curCardReq.IndexOf(charAilment)]))
+                            {
+                                foreach (ActiveAilments ail in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
                                 {
-                                    //has ailments same
-                                    ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
+                                    if (ail.ailmentType == curCardAil[curCardReq.IndexOf(charAilment)])
+                                    {
+                                        if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
+                                        {
+                                            if (targets.curShield > 0)
+                                            {
+                                                //has ailments same
+                                                ail.ailmentCurrentTurns = curCardAil[curCardReq.IndexOf(charAilment)].ailmentMaxTurns;
+                                            }
+                                        }
+
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
-                            currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
-                        }
-
-
-                    }
-                    else
-                    {
-                        //character buff
-                        foreach (ActiveAilments buff in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
-                        {
-                            if (buff.ailmentType.ailmentNames == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activeRequirement)
+                            else
                             {
-
-                                //check same ailments
-                                if (HasSameAilment(currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment))
+                                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
                                 {
-                                    foreach (ActiveAilments ail in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                                    if (targets.curShield > 0)
                                     {
-                                        if (ail.ailmentType == selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment)
-                                        {
-                                            //has ailments same
-                                            ail.ailmentCurrentTurns = selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.ailmentMaxTurns;
-                                        }
+                                        currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
                                     }
                                 }
                                 else
                                 {
-                                    print("Add new ailment " + selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment.name);
-                                    currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.activatedAilment);
+                                    currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
                                 }
-
                             }
+
+
                         }
+                        //has requirements
+                        else
+                        {
+                            print("ailments has requirement");
+                            //character buff
+                            foreach (ActiveAilments buff in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                            {
+                                if (buff.ailmentType.ailmentNames == curCardReq[curCardReq.IndexOf(charAilment)])
+                                {
 
+                                    //instant
+                                    foreach(Ailments ail in curCardAil)
+                                    {
+                                        currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, false);
+                                    }
+
+                                    //check same ailments
+                                    if (HasSameAilment(currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments, curCardAil[curCardReq.IndexOf(charAilment)]))
+                                    {
+                                        foreach (ActiveAilments ail in currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].activeAilments.ToList())
+                                        {
+                                            if (ail.ailmentType == curCardAil[curCardReq.IndexOf(charAilment)])
+                                            {
+
+                                                if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
+                                                {
+                                                    if (targets.curShield > 0)
+                                                    {
+                                                        //has ailments same
+                                                        ail.ailmentCurrentTurns = curCardAil[curCardReq.IndexOf(charAilment)].ailmentMaxTurns;
+
+                                                        print("ailments add turn");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                        if (selectedCards[curBattleTurnCard].thisCard.cardAilmentRequirements.needShield)
+                                        {
+                                            if (targets.curShield > 0)
+                                            {
+                                                currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].AddAilment(curCardAil[curCardReq.IndexOf(charAilment)]);
+                                        }
+                                    }
+
+                                }
+                            }
+
+                        }
                     }
-                }
-                else
-                {
-
-                    //no ailments
+                    else
+                    {
+                        print("not ailments");
+                        //no ailments
+                    }
                 }
             }
 

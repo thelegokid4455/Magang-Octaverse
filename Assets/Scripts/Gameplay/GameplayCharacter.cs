@@ -388,7 +388,8 @@ public class GameplayCharacter : MonoBehaviour
     {
         var a = new ActiveAilments();
         a.ailmentType = newBuff;
-        a.ailmentCurrentTurns = newBuff.ailmentMaxTurns + 1;
+        a.ailmentCurrentTurns = +2;
+        if (a.ailmentCurrentTurns > newBuff.ailmentMaxTurns + 1) a.ailmentCurrentTurns = newBuff.ailmentMaxTurns + 1;
         activeAilments.Add(a);
     }
 
@@ -416,6 +417,41 @@ public class GameplayCharacter : MonoBehaviour
 
 
         print("ailment should reduce 1");
+    }
+
+    public void ApplyAilmentInstant(Ailments toAdd, bool isEnemy)
+    {
+        AddHealth((toAdd.ailmentHealthPercentAdd / 100) * maxHealth);
+        AddShield((120 / 100) * toAdd.ailmentShieldPercentAdd);
+
+        if(isEnemy)
+        {
+            BattleManager.instance.enemyCurMana += toAdd.ailmentManaAdd;
+
+            if(BattleManager.instance.currentEnemies.Contains(this))
+            {
+                BattleManager.instance.enemyCurMana += toAdd.ailmentManaSteal;
+            }
+            else
+            {
+                BattleManager.instance.enemyCurMana -= toAdd.ailmentManaSteal;
+            }
+        }
+        else
+        {
+            BattleManager.instance.playerCurMana += toAdd.ailmentManaAdd;
+
+            if (BattleManager.instance.currentCharacters.Contains(this))
+            {
+                BattleManager.instance.enemyCurMana += toAdd.ailmentManaSteal;
+            }
+            else
+            {
+                BattleManager.instance.enemyCurMana -= toAdd.ailmentManaSteal;
+            }
+
+            if (toAdd.drawCard) BattleManager.instance.DrawCard(1);
+        }
     }
 
     public void AilmentShow()
