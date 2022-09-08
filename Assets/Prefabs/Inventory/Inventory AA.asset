@@ -20,10 +20,10 @@ MonoBehaviour:
     characterTop: {fileID: 11400000, guid: 2523e29340e629e48a166c82f2d20b7a, type: 2}
     characterBack: {fileID: 11400000, guid: 1faa3d3982b0315458695ceba8aa1e76, type: 2}
   - characterBody: {fileID: 11400000, guid: 10fbda41712fb2142a178bc036f5fde4, type: 2}
-    characterFace: {fileID: 11400000, guid: 022f2dfe72a0bca4e8d232f767f9bfa4, type: 2}
-    characterWeapon: {fileID: 11400000, guid: beceeec3345eeb94ebe9743d5ea5db0e, type: 2}
-    characterTop: {fileID: 11400000, guid: 2a9b9b2a0012d2b47be7e4f6e5c91ea5, type: 2}
-    characterBack: {fileID: 11400000, guid: fb18058e771dd034ba06f38865f2156f, type: 2}
+    characterFace: {fileID: 11400000, guid: 0196e33aab9ecb048862cc155d0a2bda, type: 2}
+    characterWeapon: {fileID: 11400000, guid: ee25390f0cc1dae488203d905516b3e9, type: 2}
+    characterTop: {fileID: 11400000, guid: 914f8e6ac8320b74484c46ca56094940, type: 2}
+    characterBack: {fileID: 11400000, guid: fa227d024f664004785a13be688fc9c5, type: 2}
   - characterBody: {fileID: 11400000, guid: 1582b51846566104e9a4a50d7cc1962c, type: 2}
     characterFace: {fileID: 11400000, guid: c23dbbcd46f8c5d48a61a87e07c5fcb5, type: 2}
     characterWeapon: {fileID: 11400000, guid: 90f3606eac14e0e418a8649e7ec07eed, type: 2}

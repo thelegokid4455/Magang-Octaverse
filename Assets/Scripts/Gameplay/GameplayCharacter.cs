@@ -10,6 +10,7 @@ public class GameplayCharacter : MonoBehaviour
 {
     public PlayerCharacterPure thisCharacter;
     public Elements thisElement;
+    public bool isEnemy;
 
     //stat
     public int characterRow;
@@ -386,6 +387,30 @@ public class GameplayCharacter : MonoBehaviour
 
     public void AddAilment(Ailments newBuff)
     {
+        foreach(ActiveAilments ail in activeAilments)
+        {
+            if (ail.ailmentType.ailmentNames == newBuff.ailmentNames)
+            {
+                if(newBuff.ailmentNames == AilmentType.Absorb)
+                {
+                    if (isEnemy)
+                    {
+                        BattleManager.instance.enemyCurMana += 1;
+                        BattleManager.instance.playerCurMana -= 1;
+                    }
+                    else
+                    {
+                        BattleManager.instance.enemyCurMana -= 1;
+                        BattleManager.instance.playerCurMana += 1;
+                    }
+                }
+                else
+                {
+                    ail.ailmentCurrentTurns++;
+                    return;
+                }
+            }
+        }
         var a = new ActiveAilments();
         a.ailmentType = newBuff;
         a.ailmentCurrentTurns = +2;
@@ -393,7 +418,7 @@ public class GameplayCharacter : MonoBehaviour
         activeAilments.Add(a);
     }
 
-    public void ApplyAilment(bool isEnemy)
+    public void ApplyAilment()
     {
         foreach (ActiveAilments ailment in activeAilments.ToList())
         {
@@ -410,92 +435,89 @@ public class GameplayCharacter : MonoBehaviour
             AddHealth((ailment.ailmentType.ailmentHealthPercentAdd / 100) * maxHealth);
             AddShield((120 / 100) * ailment.ailmentType.ailmentShieldPercentAdd);
 
-            if (isEnemy)
+            if (ailment.ailmentType.ailmentNames == AilmentType.Absorb)
             {
-                BattleManager.instance.enemyCurMana += 2;
-
-                if (BattleManager.instance.currentEnemies.Contains(this))
+                if (isEnemy)
                 {
+
                     BattleManager.instance.enemyCurMana += 1;
+                    BattleManager.instance.playerCurMana -= 1;
                 }
                 else
                 {
-                    BattleManager.instance.enemyCurMana -= 1;
 
                     BattleManager.instance.enemyCurMana -= 1;
-                }
-            }
-            else
-            {
-                BattleManager.instance.playerCurMana += 2;
-
-                if (BattleManager.instance.currentCharacters.Contains(this))
-                {
                     BattleManager.instance.playerCurMana += 1;
                 }
-                else
-                {
-                    BattleManager.instance.playerCurMana -= 1;
-
-                    BattleManager.instance.playerCurMana -= 1;
-                }
-
             }
 
             ailment.ailmentCurrentTurns--;
 
             print("ailment " + ailment.ailmentType.name + " reduce 1");
         }
-
-
-        print("ailment should reduce 1");
     }
 
-    public void ApplyAilmentInstant(Ailments toAdd, bool isEnemy)
+    public void ApplyAilmentInstant(GameplayCharacter character, Ailments toAdd, bool fromEnemy)
     {
+        AilmentShow();
         AddHealth((toAdd.ailmentHealthPercentAdd / 100) * maxHealth);
         AddShield((120 / 100) * toAdd.ailmentShieldPercentAdd);
 
-        if(isEnemy)
+        if(fromEnemy) //if from enemy
         {
             if (toAdd.ailmentManaAdd)
                 BattleManager.instance.enemyCurMana += 2;
 
-            if(BattleManager.instance.currentEnemies.Contains(this))
+            if(isEnemy) //to this character is player
             {
                 if (toAdd.ailmentManaSteal)
+                {
                     BattleManager.instance.enemyCurMana += 1;
-            }
-            else
-            {
-                if (toAdd.ailmentManaSteal)
-                    BattleManager.instance.enemyCurMana -= 1;
-
+                    BattleManager.instance.playerCurMana -= 1;
+                }
                 if (toAdd.ailmentManaDestroy)
                     BattleManager.instance.enemyCurMana -= 1;
             }
+            else //to this character is enemy
+            {
+            }
         }
-        else
+        else //if from player
         {
             if (toAdd.ailmentManaAdd)
                 BattleManager.instance.playerCurMana += 2;
 
-            if (BattleManager.instance.currentCharacters.Contains(this))
+
+            if (isEnemy) //to this character is enemy
             {
-                if (toAdd.ailmentManaSteal)
-                    BattleManager.instance.playerCurMana += 1;
+                
+
+
             }
-            else
+            else //to this character is player
             {
                 if (toAdd.ailmentManaSteal)
-                    BattleManager.instance.playerCurMana -= 1;
+                {
+                    BattleManager.instance.enemyCurMana -= 1;
+                    BattleManager.instance.playerCurMana += 1;
+                }
+
                 if (toAdd.ailmentManaDestroy)
                     BattleManager.instance.playerCurMana -= 1;
             }
 
-            if (toAdd.drawCard) 
-                BattleManager.instance.DrawCard(1);
+            
         }
+
+        if (toAdd.drawCard)
+        {
+            //BattleManager.instance.curPlayerCard--;
+            character.cardLeft--;
+
+            BattleManager.instance.DrawCard(1, false);
+        }
+
+        print("ailment " + toAdd.name + " reduce 1");
     }
 
     public void AilmentShow()
