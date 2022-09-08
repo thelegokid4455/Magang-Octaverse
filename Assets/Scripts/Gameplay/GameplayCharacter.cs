@@ -393,7 +393,7 @@ public class GameplayCharacter : MonoBehaviour
         activeAilments.Add(a);
     }
 
-    public void ApplyAilment()
+    public void ApplyAilment(bool isEnemy)
     {
         foreach (ActiveAilments ailment in activeAilments.ToList())
         {
@@ -409,6 +409,38 @@ public class GameplayCharacter : MonoBehaviour
 
             AddHealth((ailment.ailmentType.ailmentHealthPercentAdd / 100) * maxHealth);
             AddShield((120 / 100) * ailment.ailmentType.ailmentShieldPercentAdd);
+
+            if (isEnemy)
+            {
+                BattleManager.instance.enemyCurMana += 2;
+
+                if (BattleManager.instance.currentEnemies.Contains(this))
+                {
+                    BattleManager.instance.enemyCurMana += 1;
+                }
+                else
+                {
+                    BattleManager.instance.enemyCurMana -= 1;
+
+                    BattleManager.instance.enemyCurMana -= 1;
+                }
+            }
+            else
+            {
+                BattleManager.instance.playerCurMana += 2;
+
+                if (BattleManager.instance.currentCharacters.Contains(this))
+                {
+                    BattleManager.instance.playerCurMana += 1;
+                }
+                else
+                {
+                    BattleManager.instance.playerCurMana -= 1;
+
+                    BattleManager.instance.playerCurMana -= 1;
+                }
+
+            }
 
             ailment.ailmentCurrentTurns--;
 
@@ -426,35 +458,43 @@ public class GameplayCharacter : MonoBehaviour
 
         if(isEnemy)
         {
-            BattleManager.instance.enemyCurMana += 2;
+            if (toAdd.ailmentManaAdd)
+                BattleManager.instance.enemyCurMana += 2;
 
             if(BattleManager.instance.currentEnemies.Contains(this))
             {
-                BattleManager.instance.enemyCurMana += 1;
+                if (toAdd.ailmentManaSteal)
+                    BattleManager.instance.enemyCurMana += 1;
             }
             else
             {
-                BattleManager.instance.enemyCurMana -= 1;
+                if (toAdd.ailmentManaSteal)
+                    BattleManager.instance.enemyCurMana -= 1;
 
-                BattleManager.instance.enemyCurMana -= 1;
+                if (toAdd.ailmentManaDestroy)
+                    BattleManager.instance.enemyCurMana -= 1;
             }
         }
         else
         {
-            BattleManager.instance.playerCurMana += 2;
+            if (toAdd.ailmentManaAdd)
+                BattleManager.instance.playerCurMana += 2;
 
             if (BattleManager.instance.currentCharacters.Contains(this))
             {
-                BattleManager.instance.playerCurMana += 1;
+                if (toAdd.ailmentManaSteal)
+                    BattleManager.instance.playerCurMana += 1;
             }
             else
             {
-                BattleManager.instance.playerCurMana -= 1;
-
-                BattleManager.instance.playerCurMana -= 1;
+                if (toAdd.ailmentManaSteal)
+                    BattleManager.instance.playerCurMana -= 1;
+                if (toAdd.ailmentManaDestroy)
+                    BattleManager.instance.playerCurMana -= 1;
             }
 
-            if (toAdd.drawCard) BattleManager.instance.DrawCard(1);
+            if (toAdd.drawCard) 
+                BattleManager.instance.DrawCard(1);
         }
     }
 

@@ -1146,11 +1146,11 @@ public class BattleManager : MonoBehaviour
     {
         foreach (GameplayCharacter character in currentCharacters)
         {
-            character.ApplyAilment();
+            character.ApplyAilment(false);
         }
         foreach (GameplayCharacter character in currentEnemies)
         {
-            character.ApplyAilment();
+            character.ApplyAilment(true);
         }
     }
 
