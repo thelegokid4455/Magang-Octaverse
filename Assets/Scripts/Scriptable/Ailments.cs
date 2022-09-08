@@ -22,6 +22,7 @@ public class Ailments : ScriptableObject
 
     public int ailmentManaAdd;
     public int ailmentManaSteal;
+    public int ailmentManaDestroy;
 
     //public int ailmentSpeedAdd;
 
