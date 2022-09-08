@@ -780,7 +780,7 @@ public class BattleManager : MonoBehaviour
                             //instant
                             foreach (Ailments ail in curCardAil)
                             {
-                                currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, true);
+                                currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, true);
                             }
 
                             //check same ailments
@@ -832,7 +832,7 @@ public class BattleManager : MonoBehaviour
                                     //instant
                                     foreach (Ailments ail in curCardAil)
                                     {
-                                        currentEnemies[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, true);
+                                        currentCharacters[selectedCards[curBattleTurnCard].selectedTarget.IndexOf(targets)].ApplyAilmentInstant(ail, true);
                                     }
 
                                     //check same ailments
