@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 2
   cardDesc: If the target is Light or Fire, Draw Card
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 130
   cardHealthAdd: 0
@@ -31,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 00000000
+    activatedAilment:
+    - {fileID: 11400000, guid: 43197c2425242da4cb57288c39209b8f, type: 2}
+    needShield: 0

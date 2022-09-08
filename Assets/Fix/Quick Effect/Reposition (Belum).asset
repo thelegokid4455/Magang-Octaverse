@@ -17,9 +17,12 @@ MonoBehaviour:
   ailmentMaxTurns: 1
   ailmentTrueDamage: 0
   ailmentNormalDamage: 0
-  ailmentHealthAdd: 0
-  ailmentShieldAdd: 0
+  isPositif: 1
+  ailmentHealthPercentAdd: 0
+  ailmentShieldPercentAdd: 0
   ailmentManaAdd: 0
+  ailmentManaSteal: 0
+  ailmentManaDestroy: 0
   cleanseAll: 0
   drawCard: 0
   shieldBreak: 0

@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07474477699b9f948905fd6a6613704b, type: 3}
-  m_Name: Thoughness (Belum)
+  m_Name: Steal Mana
   m_EditorClassIdentifier: 
-  ailmentNames: 13
+  ailmentNames: 21
   ailmentElement: 0
-  ailmentMaxTurns: 3
+  ailmentMaxTurns: 1
   ailmentTrueDamage: 0
   ailmentNormalDamage: 0
-  ailmentHealthAdd: 0
-  ailmentShieldAdd: 0
+  isPositif: 1
+  ailmentHealthPercentAdd: 0
+  ailmentShieldPercentAdd: 0
   ailmentManaAdd: 0
+  ailmentManaSteal: 1
+  ailmentManaDestroy: 0
   cleanseAll: 0
   drawCard: 0
   shieldBreak: 0

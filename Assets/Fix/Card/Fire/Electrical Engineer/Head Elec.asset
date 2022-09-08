@@ -35,5 +35,5 @@ MonoBehaviour:
   cardAilmentRequirements:
     activeRequirement: 00000000
     activatedAilment:
-    - {fileID: 11400000, guid: 42b31f0e3487c084f858947968882b8f, type: 2}
+    - {fileID: 11400000, guid: 9bb506a48ce096a4094d0acaa34f6362, type: 2}
     needShield: 0
