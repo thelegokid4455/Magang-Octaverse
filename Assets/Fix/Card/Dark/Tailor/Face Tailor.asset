@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Cover Your Eyes!
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 7a435d6236a059d448bb4048092751dd, type: 3}
   cardMana: 2
   cardElement: 5
   cardDesc: If target has Bleeding status, it will get Blind status

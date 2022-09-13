@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Burning Spirit
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 638914d71caa12842940849aa2bff782, type: 3}
   cardMana: 1
   cardElement: 1
   cardDesc: Frontline teammate character get Berserk status

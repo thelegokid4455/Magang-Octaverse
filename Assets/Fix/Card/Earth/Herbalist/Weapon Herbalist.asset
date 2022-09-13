@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Plant A
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 57a84b16927c45b4ab4389daa52ddec0, type: 3}
   cardMana: 3
   cardElement: 3
   cardDesc: Attacking all enemy characters, if the target does not have shield it

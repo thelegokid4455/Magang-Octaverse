@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Stop Moving, You are Bleeding!
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 403004bd396da7c43b9b1fa76c4f005a, type: 3}
   cardMana: 2
   cardElement: 5
   cardDesc: If target has Bleeding status, it will get Stun status

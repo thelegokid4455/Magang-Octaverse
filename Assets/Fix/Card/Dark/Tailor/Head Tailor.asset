@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Curse Cutting
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 1d87646108fd7d04ab720f7306c4a57d, type: 3}
   cardMana: 1
   cardElement: 5
   cardDesc: This character get Curse status and target will get Bleeding status
