@@ -32,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 00000000
+    activatedAilment:
+    - {fileID: 11400000, guid: 27a2ae3e3ef764e489e0fd7acb52cefe, type: 2}
+    needShield: 0

@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 2
   cardDesc: Attack all enemy characters, unshielded target will get Chill status
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 60
   cardHealthAdd: 0
@@ -31,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 00000000
+    activatedAilment:
+    - {fileID: 11400000, guid: 230656cc6e77ba84fb20d4a6801cdbb3, type: 2}
+    needShield: 0

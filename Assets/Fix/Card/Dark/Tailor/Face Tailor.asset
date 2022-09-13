@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 5
   cardDesc: If target has Bleeding status, it will get Blind status
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 100
   cardHealthAdd: 0
@@ -31,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 05000000
+    activatedAilment:
+    - {fileID: 11400000, guid: fc2dbe9e21c2d0e43976b293e27067ec, type: 2}
+    needShield: 0

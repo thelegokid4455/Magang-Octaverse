@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 2
   cardDesc: Attacking 2 characters, target with Chill status get Exhaust status
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 100
   cardHealthAdd: 0
@@ -31,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 07000000
+    activatedAilment:
+    - {fileID: 11400000, guid: 16c8ce4874cf00a40adab1d038f3f627, type: 2}
+    needShield: 0

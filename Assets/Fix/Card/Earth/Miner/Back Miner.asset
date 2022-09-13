@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 3
   cardDesc: If target has Provoke status, damage increased to 300%
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 120
   cardHealthAdd: 0
@@ -31,3 +32,7 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 
+    activatedAilment: []
+    needShield: 0

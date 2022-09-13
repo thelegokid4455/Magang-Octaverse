@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 3
   cardDesc: Target will lose it's shield
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 10
   cardHealthAdd: 0
@@ -31,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 00000000
+    activatedAilment:
+    - {fileID: 11400000, guid: c30c63378b494574191a7b6ebb536861, type: 2}
+    needShield: 0

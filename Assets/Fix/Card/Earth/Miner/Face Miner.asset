@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 3
   cardDesc: If target has shield, it will get Provoke status
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 60
   cardHealthAdd: 0
@@ -31,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 00000000
+    activatedAilment:
+    - {fileID: 11400000, guid: 9759a01e60d090a4498b3c599402f93a, type: 2}
+    needShield: 1

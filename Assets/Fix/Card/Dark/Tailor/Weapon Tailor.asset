@@ -19,6 +19,7 @@ MonoBehaviour:
   cardElement: 5
   cardDesc: Attack 2 characters, it will get Bleeding status
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 200
   cardHealthAdd: 0
@@ -31,3 +32,8 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 00000000
+    activatedAilment:
+    - {fileID: 11400000, guid: eb077790c48065f47bc64bffdab883a0, type: 2}
+    needShield: 0

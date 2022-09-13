@@ -30,10 +30,10 @@ MonoBehaviour:
     characterTop: {fileID: 11400000, guid: 28983d57fdf502147b78bcc768b4216d, type: 2}
     characterBack: {fileID: 11400000, guid: 1b55a15de3a4d9e47a8a7aa39b7a584d, type: 2}
   - characterBody: {fileID: 11400000, guid: 30ff92db1ae3594448f1fd3bd1b5d3bb, type: 2}
-    characterFace: {fileID: 11400000, guid: 005c12f02f7fcd846a4fedf0a91ca751, type: 2}
-    characterWeapon: {fileID: 11400000, guid: 1a9755bf684d70e43b53de043978e444, type: 2}
-    characterTop: {fileID: 11400000, guid: 87df944a15f578c489d3b5ef7de81e09, type: 2}
-    characterBack: {fileID: 11400000, guid: 9e88f5beddfdb804b998b626195632b4, type: 2}
+    characterFace: {fileID: 11400000, guid: 3f9ed2524be783d4ca75f63b3ff744de, type: 2}
+    characterWeapon: {fileID: 11400000, guid: 7b8300273a5e47c4881c199d2737d141, type: 2}
+    characterTop: {fileID: 11400000, guid: ff7bd1c2d9004974ebffc2a32a669baf, type: 2}
+    characterBack: {fileID: 11400000, guid: d73b254653aeb014a933ed097c06f57f, type: 2}
   - characterBody: {fileID: 11400000, guid: b44422a00b796eb4084bf6bfddca8155, type: 2}
     characterFace: {fileID: 11400000, guid: 2ae7f77535d5a884b97a7c87a5d0de5e, type: 2}
     characterWeapon: {fileID: 11400000, guid: d9cd4fe757cc90a489508532238eb9c5, type: 2}
@@ -56,10 +56,10 @@ MonoBehaviour:
     characterTop: {fileID: 11400000, guid: 28983d57fdf502147b78bcc768b4216d, type: 2}
     characterBack: {fileID: 11400000, guid: 1b55a15de3a4d9e47a8a7aa39b7a584d, type: 2}
   - characterBody: {fileID: 11400000, guid: 30ff92db1ae3594448f1fd3bd1b5d3bb, type: 2}
-    characterFace: {fileID: 11400000, guid: 005c12f02f7fcd846a4fedf0a91ca751, type: 2}
-    characterWeapon: {fileID: 11400000, guid: 1a9755bf684d70e43b53de043978e444, type: 2}
-    characterTop: {fileID: 11400000, guid: 87df944a15f578c489d3b5ef7de81e09, type: 2}
-    characterBack: {fileID: 11400000, guid: 9e88f5beddfdb804b998b626195632b4, type: 2}
+    characterFace: {fileID: 11400000, guid: 3f9ed2524be783d4ca75f63b3ff744de, type: 2}
+    characterWeapon: {fileID: 11400000, guid: 7b8300273a5e47c4881c199d2737d141, type: 2}
+    characterTop: {fileID: 11400000, guid: ff7bd1c2d9004974ebffc2a32a669baf, type: 2}
+    characterBack: {fileID: 11400000, guid: d73b254653aeb014a933ed097c06f57f, type: 2}
   - characterBody: {fileID: 11400000, guid: b44422a00b796eb4084bf6bfddca8155, type: 2}
     characterFace: {fileID: 11400000, guid: 2ae7f77535d5a884b97a7c87a5d0de5e, type: 2}
     characterWeapon: {fileID: 11400000, guid: d9cd4fe757cc90a489508532238eb9c5, type: 2}
