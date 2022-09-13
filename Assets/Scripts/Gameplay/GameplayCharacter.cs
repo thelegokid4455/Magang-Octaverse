@@ -37,6 +37,7 @@ public class GameplayCharacter : MonoBehaviour
 
     //buffs
     public List<ActiveAilments> activeAilments = new List<ActiveAilments>();
+    bool isCursed = false;
 
     //sprites
     [SerializeField] GameObject animObject;
@@ -291,6 +292,12 @@ public class GameplayCharacter : MonoBehaviour
         }
     }
 
+    public void ApplyStunDamage()
+    {
+        var dtext = Instantiate(GameManager.instance.damageTextEffect, transform.position, Quaternion.identity);
+        dtext.GetComponent<DamageHitEffect>().SetDamageText(GameManager.instance.healthDamageColor, -1);
+    }
+
     float CountWeakness(Elements element, float dmg)
     {
         var gm = GameManager.instance;
@@ -387,35 +394,47 @@ public class GameplayCharacter : MonoBehaviour
 
     public void AddAilment(Ailments newBuff)
     {
-        foreach(ActiveAilments ail in activeAilments)
+        if(newBuff.isPositif)
         {
-            if (ail.ailmentType.ailmentNames == newBuff.ailmentNames)
+            if(isCursed)
             {
-                if(newBuff.ailmentNames == AilmentType.Absorb)
+                return;
+            }
+        }
+        else
+        {
+            foreach (ActiveAilments ail in activeAilments)
+            {
+                if (ail.ailmentType.ailmentNames == newBuff.ailmentNames)
                 {
-                    if (isEnemy)
+                    if (newBuff.ailmentNames == AilmentType.Absorb)
                     {
-                        BattleManager.instance.enemyCurMana += 1;
-                        BattleManager.instance.playerCurMana -= 1;
+                        if (isEnemy)
+                        {
+                            BattleManager.instance.enemyCurMana += 1;
+                            BattleManager.instance.playerCurMana -= 1;
+                        }
+                        else
+                        {
+                            BattleManager.instance.enemyCurMana -= 1;
+                            BattleManager.instance.playerCurMana += 1;
+                        }
                     }
                     else
                     {
-                        BattleManager.instance.enemyCurMana -= 1;
-                        BattleManager.instance.playerCurMana += 1;
+                        ail.ailmentCurrentTurns++;
+                        return;
                     }
                 }
-                else
-                {
-                    ail.ailmentCurrentTurns++;
-                    return;
-                }
             }
+            var a = new ActiveAilments();
+            a.ailmentType = newBuff;
+            a.ailmentCurrentTurns = +2;
+            if (a.ailmentCurrentTurns > newBuff.ailmentMaxTurns + 1) a.ailmentCurrentTurns = newBuff.ailmentMaxTurns + 1;
+            activeAilments.Add(a);
         }
-        var a = new ActiveAilments();
-        a.ailmentType = newBuff;
-        a.ailmentCurrentTurns = +2;
-        if (a.ailmentCurrentTurns > newBuff.ailmentMaxTurns + 1) a.ailmentCurrentTurns = newBuff.ailmentMaxTurns + 1;
-        activeAilments.Add(a);
+
+        
     }
 
     public void ApplyAilment()
@@ -428,6 +447,18 @@ public class GameplayCharacter : MonoBehaviour
                 activeAilments.Remove(ailment);
                 return;
             }
+
+            if(ailment.ailmentType.ailmentNames == AilmentType.Cursed)
+            {
+                isCursed = true;
+            }
+
+            if(isCursed)
+            {
+                if(ailment.ailmentType.isPositif)
+                    ailment.ailmentCurrentTurns = 0;
+            }
+            //
 
             ApplyTrueDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentTrueDamage);
             ApplyNormalDamage(ailment.ailmentType.ailmentElement, ailment.ailmentType.ailmentNormalDamage);
@@ -451,7 +482,14 @@ public class GameplayCharacter : MonoBehaviour
                 }
             }
 
-            ailment.ailmentCurrentTurns--;
+            if(ailment.ailmentType.ailmentNames == AilmentType.Stun)
+            {
+
+            }
+            else
+            {
+                ailment.ailmentCurrentTurns--;
+            }
 
             print("ailment " + ailment.ailmentType.name + " reduce 1");
         }
@@ -472,8 +510,10 @@ public class GameplayCharacter : MonoBehaviour
             {
                 if (toAdd.ailmentManaSteal)
                 {
-                    BattleManager.instance.enemyCurMana += 1;
-                    BattleManager.instance.playerCurMana -= 1;
+                    if(BattleManager.instance.enemyCurMana < BattleManager.instance.enemyMaxMana)
+                        BattleManager.instance.enemyCurMana += 1;
+                    if (BattleManager.instance.playerCurMana > 0)
+                        BattleManager.instance.playerCurMana -= 1;
                 }
                 if (toAdd.ailmentManaDestroy)
                     BattleManager.instance.enemyCurMana -= 1;
@@ -498,8 +538,10 @@ public class GameplayCharacter : MonoBehaviour
             {
                 if (toAdd.ailmentManaSteal)
                 {
-                    BattleManager.instance.enemyCurMana -= 1;
-                    BattleManager.instance.playerCurMana += 1;
+                    if (BattleManager.instance.enemyCurMana > 0)
+                        BattleManager.instance.enemyCurMana -= 1;
+                    if (BattleManager.instance.playerCurMana < BattleManager.instance.playerMaxMana)
+                        BattleManager.instance.playerCurMana += 1;
                 }
 
                 if (toAdd.ailmentManaDestroy)

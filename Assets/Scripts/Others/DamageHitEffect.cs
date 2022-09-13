@@ -9,6 +9,13 @@ public class DamageHitEffect : MonoBehaviour
     public void SetDamageText(Color color, float damage)
     {
         damageText.color = color;
-        damageText.text = "" + damage;
+        if(damage > 0)
+        {
+            damageText.text = "" + damage;
+        }
+        else
+        {
+            damageText.text = "Missed";
+        }
     }
 }

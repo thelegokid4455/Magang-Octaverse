@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07474477699b9f948905fd6a6613704b, type: 3}
-  m_Name: Cursed (Belum)
+  m_Name: Stun
   m_EditorClassIdentifier: 
-  ailmentNames: 9
+  ailmentNames: 1
   ailmentElement: 0
-  ailmentMaxTurns: 3
+  ailmentMaxTurns: 0
   ailmentTrueDamage: 0
   ailmentNormalDamage: 0
-  ailmentHealthAdd: 0
-  ailmentShieldAdd: 0
+  isPositif: 0
+  ailmentHealthPercentAdd: 0
+  ailmentShieldPercentAdd: 0
   ailmentManaAdd: 0
+  ailmentManaSteal: 0
+  ailmentManaDestroy: 0
   cleanseAll: 0
   drawCard: 0
   shieldBreak: 0
