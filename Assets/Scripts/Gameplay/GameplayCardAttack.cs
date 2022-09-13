@@ -186,6 +186,21 @@ public class GameplayCardAttack : MonoBehaviour
                 selectedTarget.Add(BattleManager.instance.currentEnemies[2]);
             if (thisCard.cardAttackRow4 && BattleManager.instance.currentEnemies.Count >= 4)
                 selectedTarget.Add(BattleManager.instance.currentEnemies[3]);
+
+            foreach(Ailments ail in thisCard.cardAilmentRequirements.activatedAilment)
+            {
+                if(ail.ailmentNames == AilmentType.Regeneration)
+                {
+                    if (thisCard.cardHealRow1 && BattleManager.instance.currentCharacters.Count >= 1)
+                        selectedTarget.Add(BattleManager.instance.currentCharacters[0]);
+                    if (thisCard.cardHealRow2 && BattleManager.instance.currentCharacters.Count >= 2)
+                        selectedTarget.Add(BattleManager.instance.currentCharacters[1]);
+                    if (thisCard.cardHealRow3 && BattleManager.instance.currentCharacters.Count >= 3)
+                        selectedTarget.Add(BattleManager.instance.currentCharacters[2]);
+                    if (thisCard.cardHealRow4 && BattleManager.instance.currentCharacters.Count >= 4)
+                        selectedTarget.Add(BattleManager.instance.currentCharacters[3]);
+                }
+            }
         }
 
     }
