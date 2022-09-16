@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Darker Than Black
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 0b37554ad321583408e0c9aa00f39a3c, type: 3}
   cardMana: 2
   cardElement: 1
   cardDesc: If attacked by Dark or Earth targets, provide Blind status

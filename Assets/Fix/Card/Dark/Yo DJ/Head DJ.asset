@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Let's Dance!
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 67eb663d18a358d48864d26f4d4d033d, type: 3}
   cardMana: 2
   cardElement: 5
   cardDesc: This character gain Fortune and Berserk status
@@ -32,3 +32,7 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 
+    activatedAilment: []
+    needShield: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: The Soothing Sound
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 03485cc7afdcd424c849d4b15b90fbd7, type: 3}
   cardMana: 4
   cardElement: 4
   cardDesc: All teammates character get Regeneration status

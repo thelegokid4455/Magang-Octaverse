@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Continues Strike
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 17bdb233b35e8494bab716e5344d06d6, type: 3}
   cardMana: 2
   cardElement: 3
   cardDesc: If target has shield, attack again with 200% damage
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 180
   cardHealthAdd: 0
@@ -31,3 +32,7 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 
+    activatedAilment: []
+    needShield: 0

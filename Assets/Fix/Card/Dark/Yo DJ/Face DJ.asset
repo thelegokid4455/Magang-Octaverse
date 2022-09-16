@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Come On, Move!
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 701747e4a4346aa429763602560db8c4, type: 3}
   cardMana: 2
   cardElement: 5
   cardDesc: Attack 2x if target does not have status ailment
   isEnemy: 0
+  cardAttackType: 0
   cardTrueDamage: 0
   cardNormalDamage: 100
   cardHealthAdd: 0
@@ -31,3 +32,7 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 
+    activatedAilment: []
+    needShield: 0

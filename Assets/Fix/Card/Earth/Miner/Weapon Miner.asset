@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Strike
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: ae8d462124ff65a448df24baa40ef990, type: 3}
   cardMana: 1
   cardElement: 3
   cardDesc: Target will lose it's shield

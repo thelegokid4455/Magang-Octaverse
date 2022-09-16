@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Heavy Strike
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 6eab9a28d11bbc640932598e09607ab6, type: 3}
   cardMana: 2
   cardElement: 3
   cardDesc: If target has Provoke status, damage increased to 300%

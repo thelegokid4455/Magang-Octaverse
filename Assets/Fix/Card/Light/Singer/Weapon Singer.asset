@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Lullaby
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 8c4f6fc83f4f23746a678fd757d16139, type: 3}
   cardMana: 4
   cardElement: 4
   cardDesc: Attack all enemy characters, if target does not have status ailment it

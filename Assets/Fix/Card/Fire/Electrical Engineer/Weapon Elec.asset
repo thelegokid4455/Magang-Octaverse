@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Electric Flash
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: c18a339f2388e0a45a0a0461f5747423, type: 3}
   cardMana: 4
   cardElement: 1
   cardDesc: Providing Blind status to all enemies, dark characters will take 300%

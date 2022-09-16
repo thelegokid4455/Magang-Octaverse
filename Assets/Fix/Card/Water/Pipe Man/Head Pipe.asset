@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Ready to Clean Up
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: ccc2955d603dcc8499d1e6607335bef7, type: 3}
   cardMana: 2
   cardElement: 2
   cardDesc: All teammate characters get Regeneration status
@@ -32,3 +32,7 @@ MonoBehaviour:
   cardHealRow2: 0
   cardHealRow3: 0
   cardHealRow4: 0
+  cardAilmentRequirements:
+    activeRequirement: 
+    activatedAilment: []
+    needShield: 0

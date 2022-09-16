@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardId: 0
   cardName: Hypnotizing Voice
-  cardIllust: {fileID: 21300000, guid: 8313108d2f2f39c49a04679f5f2da2a5, type: 3}
+  cardIllust: {fileID: 21300000, guid: 4bd9d3c8b348ed04992b9771f53585ec, type: 3}
   cardMana: 2
   cardElement: 4
   cardDesc: Attack with True Damage, if target has Sleep, Stun, or Exhaust status
